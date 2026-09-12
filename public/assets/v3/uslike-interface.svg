@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-labelledby="title description">
+  <title id="title">Uslike interface</title>
+  <desc id="description">A monochrome interpretation of Uslike's public landing page.</desc>
+  <rect width="800" height="450" fill="#fff"/>
+  <g fill="none" stroke="#181817" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="28" y="26" width="46" height="46" rx="14" stroke-width="2"/>
+    <path d="M51 36v26M38 49h26M43 41l16 16M59 41 43 57" stroke-width="2"/>
+    <path d="M28 105H772M28 408H772" stroke-width="1" stroke-dasharray="8 10" opacity=".4"/>
+    <rect x="515" y="52" width="250" height="286" rx="32" stroke-width="3"/>
+    <rect x="544" y="84" width="156" height="54" rx="18" stroke-width="2"/>
+    <rect x="581" y="159" width="155" height="54" rx="18" stroke-width="2"/>
+    <rect x="544" y="234" width="180" height="54" rx="18" stroke-width="2"/>
+    <circle cx="550" cy="319" r="8" stroke-width="2"/>
+    <path d="M571 319h131" stroke-width="2" stroke-dasharray="6 7"/>
+    <path d="M475 122c-17-24-59-10-59 22 0 30 59 64 59 64s59-34 59-64c0-32-42-46-59-22Z" stroke-width="3"/>
+    <rect x="31" y="313" width="132" height="42" rx="21" stroke-width="2"/>
+    <rect x="175" y="313" width="132" height="42" rx="21" stroke-width="2"/>
+    <rect x="319" y="313" width="132" height="42" rx="21" stroke-width="2"/>
+  </g>
+  <g fill="#181817" font-family="Arial, Helvetica, sans-serif">
+    <text x="90" y="49" font-size="25" font-weight="700">Uslike</text>
+    <text x="90" y="68" font-size="12" letter-spacing="2">DEEPER CONVERSATIONS</text>
+    <text x="30" y="150" font-size="14" letter-spacing="2">RELATIONSHIP MATCHING</text>
+    <text x="28" y="199" font-size="43" font-weight="700">MATCH ON WHAT</text>
+    <text x="28" y="244" font-size="43" font-weight="700">MATTERS.</text>
+    <text x="30" y="275" font-size="17">Shared interests · brainwave questions · mutual reveal</text>
+    <text x="548" y="106" font-size="13">What do you wish people</text>
+    <text x="548" y="124" font-size="13">asked you more often?</text>
+    <text x="595" y="192" font-size="13">Reveal together</text>
+    <text x="558" y="267" font-size="13">Open a room to talk</text>
+    <text x="57" y="341" font-size="16" font-weight="700">1 MATCH</text>
+    <text x="193" y="341" font-size="16" font-weight="700">2+N PROMPTS</text>
+    <text x="343" y="341" font-size="16" font-weight="700">50 TOPICS</text>
+  </g>
+</svg>
