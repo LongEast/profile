@@ -903,7 +903,7 @@ body.v3-page #root {
 }
 
 .v3-world-experience {
-  width: 400px;
+  width: 360px;
   padding: 0;
   background: var(--v3-world-paper);
 }
@@ -911,7 +911,7 @@ body.v3-page #root {
 .v3-world-experience button {
   display: flex;
   width: 100%;
-  min-height: 170px;
+  min-height: 190px;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
@@ -929,9 +929,16 @@ body.v3-page #root {
 }
 
 .v3-world-experience strong {
-  font-size: 32px;
+  width: 100%;
+  font-size: 28px;
   font-weight: 600;
-  line-height: 0.94;
+  line-height: 0.98;
+  overflow-wrap: anywhere;
+}
+
+.v3-world-experience button > span:not(.v3-world-open-label) {
+  width: 100%;
+  overflow-wrap: anywhere;
 }
 
 .v3-world-experience .v3-world-meta {
@@ -1161,22 +1168,39 @@ body.v3-page #root {
   margin-top: 1.15rem;
 }
 
-.v3-modal__tags span,
-.v3-modal__links a {
+.v3-modal__tags span {
   padding: 0.33rem 0.55rem;
   border: 1px solid var(--v3-line);
   color: inherit;
   font-family: "DM Mono", monospace;
   font-size: 0.7rem;
   line-height: 1;
+}
+
+.v3-modal__links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.45rem;
+  padding: 0.62rem 0.9rem;
+  border: 2px solid var(--v3-ink);
+  color: var(--v3-background);
+  background: var(--v3-ink);
+  box-shadow: 0.24rem 0.24rem 0 var(--v3-line);
+  font-family: "DM Mono", monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1;
   text-decoration: none;
+  transition: transform 140ms ease, box-shadow 140ms ease, color 140ms ease, background-color 140ms ease;
 }
 
 .v3-modal__links a:hover,
 .v3-modal__links a:focus-visible {
-  border-color: var(--v3-ink);
-  background: var(--v3-ink);
-  color: var(--v3-background);
+  color: var(--v3-ink);
+  background: var(--v3-surface);
+  box-shadow: 0.12rem 0.12rem 0 var(--v3-line);
+  transform: translate(0.12rem, 0.12rem);
   outline: none;
 }
 

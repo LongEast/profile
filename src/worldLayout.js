@@ -35,7 +35,7 @@ export const EXHIBIT_LAYOUT = {
   },
   experience: {
     sign: 32,
-    items: [34, 38, 42, 46, 50],
+    items: [33, 42, 51],
   },
   projects: {
     sign: 59,

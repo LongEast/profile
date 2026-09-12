@@ -633,7 +633,7 @@ function ExperienceExhibit({ activeNight, baseX, experience, index, messages, on
         castShadow={false}
         kind="paper"
         position={[0, 6.1, -6.78]}
-        scale={[10.4, 5.45, 0.12]}
+        scale={[9.4, 6.05, 0.12]}
       />
       <WorldHtml
         activeNight={activeNight}
