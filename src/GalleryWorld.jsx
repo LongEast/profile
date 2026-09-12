@@ -567,6 +567,42 @@ function ProjectDiagram({ art, messages }) {
     );
   }
 
+  if (art === "mobile-agent") {
+    return (
+      <div aria-hidden="true" className="v3-world-project-art v3-world-project-art--mobile-agent">
+        <div className="v3-mobile-preview__phone">
+          <div className="v3-mobile-preview__status">
+            <span />
+            <i />
+          </div>
+          <div className="v3-mobile-preview__feed">
+            <section>
+              <i />
+              <span />
+              <span />
+            </section>
+            <section className="is-ad">
+              <b>AD</b>
+              <span />
+              <span />
+            </section>
+            <section>
+              <i />
+              <span />
+            </section>
+          </div>
+          <div className="v3-mobile-preview__home" />
+        </div>
+        <div className="v3-mobile-preview__scanline" />
+        <div className="v3-mobile-preview__result">
+          <span>UI TREE</span>
+          <span>OCR</span>
+          <strong>AD ✓</strong>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div aria-hidden="true" className={`v3-world-project-art v3-world-project-art--${art}`}>
       <span className="v3-world-art-node v3-world-art-node--a" />
