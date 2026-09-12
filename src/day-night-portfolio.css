@@ -869,6 +869,117 @@ body.v3-page #root {
   object-fit: contain;
 }
 
+.v3-world-project-art--dashboard {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  grid-template-rows: 25px 1fr;
+  color: var(--v3-world-ink);
+  background: var(--v3-world-paper);
+  font-family: "DM Mono", monospace;
+}
+
+.v3-dashboard-preview__bar {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 16px 1fr 38px;
+  gap: 7px;
+  align-items: center;
+  padding: 4px 7px;
+  border-bottom: 1px solid var(--v3-world-border);
+}
+
+.v3-dashboard-preview__bar b {
+  display: grid;
+  width: 14px;
+  height: 14px;
+  place-items: center;
+  border: 1px solid var(--v3-world-border);
+  font-size: 8px;
+  transform: rotate(-2deg);
+}
+
+.v3-dashboard-preview__bar span,
+.v3-dashboard-preview__bar i {
+  display: block;
+  height: 6px;
+  border: 1px solid var(--v3-world-border);
+  border-radius: 7px 5px 6px 8px;
+}
+
+.v3-dashboard-preview__bar span { width: 62%; }
+
+.v3-dashboard-preview__sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  align-items: center;
+  padding-top: 12px;
+  border-right: 1px solid var(--v3-world-border);
+  background: var(--v3-world-chip);
+}
+
+.v3-dashboard-preview__sidebar span {
+  width: 13px;
+  height: 9px;
+  border: 1px solid var(--v3-world-border);
+  border-radius: 2px;
+}
+
+.v3-dashboard-preview__main {
+  padding: 9px 10px 10px;
+}
+
+.v3-dashboard-preview__heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 7px;
+}
+
+.v3-dashboard-preview__heading strong,
+.v3-dashboard-preview__grid b {
+  font-size: 7px;
+  letter-spacing: 0.04em;
+}
+
+.v3-dashboard-preview__heading span {
+  width: 39px;
+  height: 8px;
+  border: 1px solid var(--v3-world-border);
+  border-radius: 8px;
+}
+
+.v3-dashboard-preview__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.v3-dashboard-preview__grid section {
+  min-width: 0;
+  height: 39px;
+  padding: 5px 6px;
+  border: 1px solid var(--v3-world-border);
+  background: var(--v3-world-paper);
+  transform: rotate(0.25deg);
+}
+
+.v3-dashboard-preview__grid section.is-wide {
+  grid-column: 1 / -1;
+  height: 42px;
+  transform: rotate(-0.2deg);
+}
+
+.v3-dashboard-preview__grid span {
+  display: block;
+  width: 86%;
+  height: 3px;
+  margin-top: 4px;
+  background: color-mix(in srgb, var(--v3-world-ink) 35%, transparent);
+}
+
+.v3-dashboard-preview__grid span:last-child { width: 58%; }
+
 .v3-world-art-node {
   position: absolute;
   z-index: 2;

@@ -213,9 +213,15 @@ export const projects = [
       "Worked with Atlassian’s enterprise team to migrate and adapt an existing Jira Space Gadget for Atlassian Home Dashboard. Reused official Atlassian components and independently implemented the remaining frontend, backend, and page-integration logic with Atlassian Forge.",
       "Designed the product storyboard and interaction flow in Figma, then connected design context to development through Codex + Figma MCP. Completed the end-to-end process from requirement analysis and product design to AI-assisted full-stack implementation and final delivery, collaborating directly with Atlassian product owners throughout rollout.",
     ],
-    tags: ["Atlassian Forge", "Figma", "Codex", "Full-stack"],
+    tags: ["Figma", "Codex", "Full-stack"],
     art: "dashboard",
-    links: [],
+    links: [
+      {
+        label: "Watch group demo",
+        href: "https://drive.google.com/file/d/1bm0b-WfXO7EZiwS5iTcek602-Nzea1_Z/view?usp=drive_link",
+        external: true,
+      },
+    ],
   },
   {
     id: "uslike",

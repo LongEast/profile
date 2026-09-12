@@ -187,7 +187,8 @@ const zhTranslations = {
         "与 Atlassian 企业团队合作，将已有 Jira Space Gadget 迁移并适配至 Atlassian Home Dashboard；复用 Atlassian 官方组件，并基于 Atlassian Forge 独立实现其余前后端业务逻辑与页面集成。",
         "使用 Figma 设计产品 Storyboard 与交互流程，并通过 Codex + Figma MCP 将设计上下文接入开发流程；完成从需求梳理、产品设计、AI 全栈实现到最终交付的端到端流程，并与 Atlassian 产品负责人协同推进项目落地。",
       ],
-      tags: ["Atlassian Forge", "Figma", "Codex", "全栈开发"],
+      tags: ["Figma", "Codex", "全栈开发"],
+      links: [{ label: "小组 Demo 视频" }],
     },
     uslike: {
       eyebrow: "AI 匹配产品 · 4000 队中入围 300 强",

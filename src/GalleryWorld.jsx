@@ -526,6 +526,47 @@ function ProjectDiagram({ art, messages }) {
     );
   }
 
+  if (art === "dashboard") {
+    return (
+      <div aria-hidden="true" className="v3-world-project-art v3-world-project-art--dashboard">
+        <div className="v3-dashboard-preview__bar">
+          <b>A</b>
+          <span />
+          <i />
+        </div>
+        <div className="v3-dashboard-preview__sidebar">
+          <span />
+          <span />
+          <span />
+          <span />
+        </div>
+        <div className="v3-dashboard-preview__main">
+          <div className="v3-dashboard-preview__heading">
+            <strong>HOME</strong>
+            <span />
+          </div>
+          <div className="v3-dashboard-preview__grid">
+            <section className="is-wide">
+              <b>JIRA SPACE</b>
+              <span />
+              <span />
+            </section>
+            <section>
+              <b>RECENT</b>
+              <span />
+              <span />
+            </section>
+            <section>
+              <b>TEAM</b>
+              <span />
+              <span />
+            </section>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div aria-hidden="true" className={`v3-world-project-art v3-world-project-art--${art}`}>
       <span className="v3-world-art-node v3-world-art-node--a" />
