@@ -491,7 +491,15 @@ function MovementController({
         : TRACK_LENGTH - shortDistance;
 
       if (shortDistance < ARRIVAL_THRESHOLD) {
+        player.position.x += shortDelta;
         autopilotRef.current = null;
+        input.wheelVelocity = 0;
+        input.touchMomentum = 0;
+        input.pendingWheel = 0;
+        input.swipeDelta = 0;
+        updateMotion(motionRef, 0);
+        reportPosition({ autopilotRef, lastSectionRef, motionRef, onSectionChange, player, testStateRef, velocity: 0 });
+        return;
       } else {
         const velocity = autopilot.direction * autopilotSpeed(distance);
         input.wheelVelocity = velocity;

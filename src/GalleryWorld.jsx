@@ -297,6 +297,7 @@ function GalleryTile({ activeNight, baseX, index, playerRef }) {
 function HeroExhibit({ activeNight, messages, playerRef, profile }) {
   const { size } = useThree();
   const isNarrow = size.width <= 680;
+  const horizontalOffset = -Math.min(5.1, Math.max(0, (size.width - 680) * 0.0062));
 
   return (
     <CircularSlot baseX={EXHIBIT_LAYOUT.home.title} playerRef={playerRef}>
@@ -304,7 +305,7 @@ function HeroExhibit({ activeNight, messages, playerRef, profile }) {
         activeNight={activeNight}
         className="v3-world-hero"
         distanceFactor={11}
-        position={[isNarrow ? 0 : -5.1, isNarrow ? 5.9 : 6.25, -6.72]}
+        position={[horizontalOffset, isNarrow ? 5.9 : 6.25, -6.72]}
       >
         <p className="v3-world-hero-kicker">{messages.hello}</p>
         <h1>{profile.name}</h1>
