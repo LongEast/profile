@@ -2,14 +2,11 @@ import { Component, useCallback, useEffect, useMemo, useRef, useState } from "re
 import "@fontsource/patrick-hand/latin-400.css";
 import WorldScene from "./WorldScene";
 import {
-  awards,
-  experiences,
   palettes,
-  profile,
-  projects,
   SECTION_ORDER,
   sections,
 } from "./content";
+import { detectSystemLocale, getLocalizedContent, getMessages } from "./i18n";
 import "./day-night-portfolio.css";
 
 const SECTION_BY_ID = Object.fromEntries(
@@ -89,7 +86,7 @@ class WorldErrorBoundary extends Component {
   }
 }
 
-function Modal({ closeButtonRef, item, type, onClose, dialogRef }) {
+function Modal({ closeButtonRef, item, type, onClose, dialogRef, messages }) {
   const isProject = type === "project";
   const isNotice = type === "notice";
   const headingId = `${type}-${item.id}-title`;
@@ -106,7 +103,7 @@ function Modal({ closeButtonRef, item, type, onClose, dialogRef }) {
         tabIndex="-1"
       >
         <button
-          aria-label="Close dialog"
+          aria-label={messages.closeDialog}
           className="v3-modal__close"
           onClick={onClose}
           ref={closeButtonRef}
@@ -118,15 +115,15 @@ function Modal({ closeButtonRef, item, type, onClose, dialogRef }) {
         {isNotice ? (
           <>
             <p className="v3-modal__eyebrow">{item.label}</p>
-            <h2 id={headingId}>Coming soon</h2>
-            <p className="v3-modal__body">The blog is still being prepared. Please check back soon.</p>
+            <h2 id={headingId}>{messages.comingSoon}</h2>
+            <p className="v3-modal__body">{messages.blogPreparing}</p>
           </>
         ) : (
           <>
-            {isProject ? <ProjectPreview kind={item.art} /> : <ExhibitMark kind={item.exhibit} />}
+            {isProject ? <ProjectPreview kind={item.art} messages={messages} /> : <ExhibitMark kind={item.exhibit} />}
 
             <p className="v3-modal__eyebrow">
-              {isProject ? item.eyebrow : item.placement ?? item.date ?? "Experience"}
+              {isProject ? item.eyebrow : item.placement ?? item.date ?? messages.experience}
             </p>
             <h2 id={headingId}>{item.title}</h2>
             <p className="v3-modal__meta">
@@ -143,7 +140,7 @@ function Modal({ closeButtonRef, item, type, onClose, dialogRef }) {
             ) : null}
 
             {item.tags?.length ? (
-              <div aria-label="Project technologies" className="v3-modal__tags">
+              <div aria-label={messages.projectTechnologies(item.title)} className="v3-modal__tags">
                 {item.tags.map((tag) => (
                   <span key={tag}>{tag}</span>
                 ))}
@@ -183,13 +180,7 @@ function ExhibitMark({ kind }) {
   return <div aria-hidden="true" className="v3-exhibit-mark">{glyphs[kind] ?? "•"}</div>;
 }
 
-function ProjectPreview({ kind }) {
-  const labels = {
-    uslike: ["MATCH", "MUTUAL REVEAL", "ROOM"],
-    urbantrip: ["CONSTRAINT", "ROUTE", "VALID"],
-    cohort: ["COHORT", "BOOLEAN", "ANALYSE"],
-  };
-
+function ProjectPreview({ kind, messages }) {
   return (
     <div aria-hidden="true" className={`v3-project-preview v3-project-preview--${kind}`}>
       <div className="v3-project-preview__bar">
@@ -200,7 +191,7 @@ function ProjectPreview({ kind }) {
       <div className="v3-project-preview__screen">
         <div className="v3-project-preview__side" />
         <div className="v3-project-preview__content">
-          {labels[kind].map((label, index) => (
+          {messages.preview[kind].map((label, index) => (
             <div className={`v3-project-preview__row row-${index + 1}`} key={label}>
               <span>{label}</span>
             </div>
@@ -211,17 +202,18 @@ function ProjectPreview({ kind }) {
   );
 }
 
-function FooterNav({ activeSection, onNavigate }) {
+function FooterNav({ activeSection, messages, onNavigate, sections: localizedSections }) {
   const activeIndex = SECTION_ORDER.indexOf(activeSection);
   const previous = SECTION_ORDER[(activeIndex + SECTION_ORDER.length - 1) % SECTION_ORDER.length];
   const next = SECTION_ORDER[(activeIndex + 1) % SECTION_ORDER.length];
   const entries = [previous, activeSection, next];
+  const localizedById = Object.fromEntries(localizedSections.map((section) => [section.id, section]));
 
   return (
-    <nav aria-label="Portfolio sections" className="v3-footer-nav">
+    <nav aria-label={messages.portfolioSections} className="v3-footer-nav">
       <div className="v3-footer-nav__track">
         {entries.map((id, index) => {
-          const section = SECTION_BY_ID[id];
+          const section = localizedById[id];
           const isActive = id === activeSection;
 
           return (
@@ -244,19 +236,19 @@ function FooterNav({ activeSection, onNavigate }) {
   );
 }
 
-function ControlsHint() {
+function ControlsHint({ messages }) {
   return (
-    <aside aria-label="Movement controls" className="v3-controls-hint">
+    <aside aria-label={messages.movementControls} className="v3-controls-hint">
       <span className="v3-control-pair"><kbd>A</kbd><kbd>D</kbd></span>
       <i aria-hidden="true" />
       <span className="v3-control-pair"><kbd>←</kbd><kbd>→</kbd></span>
-      <em>or</em>
+      <em>{messages.or}</em>
       <span aria-hidden="true" className="v3-mouse-mark"><b /></span>
     </aside>
   );
 }
 
-function CelestialSticker({ activeTheme, onToggleTheme, reducedMotion }) {
+function CelestialSticker({ activeTheme, messages, onToggleTheme, reducedMotion }) {
   const previousThemeRef = useRef(activeTheme);
   const sequenceRef = useRef(0);
   const [transition, setTransition] = useState({
@@ -304,7 +296,7 @@ function CelestialSticker({ activeTheme, onToggleTheme, reducedMotion }) {
 
   return (
     <button
-      aria-label={`Switch to ${activeTheme === "day" ? "dark" : "light"} mode`}
+      aria-label={activeTheme === "day" ? messages.switchToDark : messages.switchToLight}
       className="v3-celestial-pulley"
       data-active={activeTheme}
       data-block-game-touch
@@ -344,20 +336,56 @@ function CelestialSticker({ activeTheme, onToggleTheme, reducedMotion }) {
         </svg>
       </div>
 
-      <span aria-hidden="true" className="v3-theme-tooltip">Click to change mode</span>
+      <span aria-hidden="true" className="v3-theme-tooltip">{messages.themeTooltip}</span>
     </button>
+  );
+}
+
+function LanguageSwitcher({ locale, messages, onLocaleChange }) {
+  return (
+    <div
+      aria-label={messages.language}
+      className="v3-language-switcher"
+      data-block-game-touch
+      role="group"
+    >
+      <button
+        aria-label={messages.useEnglish}
+        aria-pressed={locale === "en"}
+        className={locale === "en" ? "is-active" : ""}
+        lang="en"
+        onClick={() => onLocaleChange("en")}
+        type="button"
+      >
+        EN
+      </button>
+      <button
+        aria-label={messages.useChinese}
+        aria-pressed={locale === "zh"}
+        className={locale === "zh" ? "is-active" : ""}
+        lang="zh-CN"
+        onClick={() => onLocaleChange("zh")}
+        type="button"
+      >
+        中文
+      </button>
+    </div>
   );
 }
 
 function FallbackPortfolio({
   activeSection,
   activeTheme,
+  content,
+  messages,
   onNavigate,
   onOpenAward,
   onOpenExperience,
   onOpenProject,
   onOpenUnavailableLink,
 }) {
+  const { awards, experiences, profile, projects, sections: localizedSections } = content;
+
   useEffect(() => {
     document.getElementById(activeSection)?.scrollIntoView({ block: "start" });
   }, [activeSection]);
@@ -370,10 +398,15 @@ function FallbackPortfolio({
         <p>{profile.headline}</p>
       </header>
 
-      <FooterNav activeSection={activeSection} onNavigate={onNavigate} />
+      <FooterNav
+        activeSection={activeSection}
+        messages={messages}
+        onNavigate={onNavigate}
+        sections={localizedSections}
+      />
 
       <section aria-labelledby="v3-fallback-home-title">
-        <h2 id="v3-fallback-home-title">Home</h2>
+        <h2 id="v3-fallback-home-title">{messages.home}</h2>
         <p>{profile.introduction}</p>
         <p>{profile.education.map((education) => `${education.institution} — ${education.program}`).join(" · ")}</p>
         <div className="v3-fallback__links">
@@ -388,15 +421,15 @@ function FallbackPortfolio({
       </section>
 
       <section aria-labelledby="v3-fallback-experience-title" id="experience">
-        <h2 id="v3-fallback-experience-title">Experience</h2>
+        <h2 id="v3-fallback-experience-title">{messages.experience}</h2>
         {experiences.map((experience) => <button key={experience.id} onClick={() => onOpenExperience(experience)} type="button">{experience.title}</button>)}
       </section>
       <section aria-labelledby="v3-fallback-projects-title" id="projects">
-        <h2 id="v3-fallback-projects-title">Projects</h2>
+        <h2 id="v3-fallback-projects-title">{messages.projects}</h2>
         {projects.map((project) => <button key={project.id} onClick={() => onOpenProject(project)} type="button">{project.title}</button>)}
       </section>
       <section aria-labelledby="v3-fallback-awards-title" id="awards">
-        <h2 id="v3-fallback-awards-title">Awards</h2>
+        <h2 id="v3-fallback-awards-title">{messages.awards}</h2>
         {awards.map((award) => <button key={award.id} onClick={() => onOpenAward(award)} type="button">{award.placement} · {award.title}</button>)}
       </section>
     </main>
@@ -407,6 +440,7 @@ export default function DayNightPortfolio() {
   const [initialSection] = useState(getSectionFromHash);
   const [activeSection, setActiveSection] = useState(initialSection);
   const [activeTheme, setActiveTheme] = useState(getSystemTheme);
+  const [locale, setLocale] = useState(detectSystemLocale);
   const [navigationRequest, setNavigationRequest] = useState(null);
   const [selectedAward, setSelectedAward] = useState(null);
   const [selectedProject, setSelectedProject] = useState(null);
@@ -422,6 +456,8 @@ export default function DayNightPortfolio() {
   const navigationNonceRef = useRef(0);
 
   const palette = palettes[activeTheme];
+  const localizedContent = useMemo(() => getLocalizedContent(locale), [locale]);
+  const messages = getMessages(locale);
   const modal = useMemo(() => (
     selectedProject
       ? { item: selectedProject, type: "project" }
@@ -524,6 +560,14 @@ export default function DayNightPortfolio() {
   }, [commitSection, fallback, requestNavigation]);
 
   useEffect(() => {
+    const previousLanguage = document.documentElement.lang;
+    document.documentElement.lang = locale === "zh" ? "zh-CN" : "en";
+    return () => {
+      document.documentElement.lang = previousLanguage;
+    };
+  }, [locale]);
+
+  useEffect(() => {
     const timer = window.setTimeout(() => setIsLoading(false), reducedMotion ? 0 : 750);
     return () => window.clearTimeout(timer);
   }, [reducedMotion]);
@@ -594,6 +638,7 @@ export default function DayNightPortfolio() {
     <div
       className="v3-portfolio"
       data-active-section={activeSection}
+      data-locale={locale}
       data-phase={activeTheme}
       style={shellStyle}
     >
@@ -604,14 +649,18 @@ export default function DayNightPortfolio() {
       >
         <CelestialSticker
           activeTheme={activeTheme}
+          messages={messages}
           onToggleTheme={toggleTheme}
           reducedMotion={reducedMotion}
         />
+        <LanguageSwitcher locale={locale} messages={messages} onLocaleChange={setLocale} />
 
         {fallback ? (
           <FallbackPortfolio
             activeSection={activeSection}
             activeTheme={activeTheme}
+            content={localizedContent}
+            messages={messages}
             onNavigate={requestNavigation}
             onOpenAward={openAward}
             onOpenExperience={openExperience}
@@ -625,6 +674,7 @@ export default function DayNightPortfolio() {
               activeTheme={activeTheme}
               blocked={Boolean(modal)}
               initialSection={initialSection}
+              locale={locale}
               navigationRequest={navigationRequest}
               onOpenAward={openAward}
               onOpenExperience={openExperience}
@@ -638,16 +688,21 @@ export default function DayNightPortfolio() {
 
         {!fallback ? (
           <>
-            {activeSection === "home" ? <ControlsHint /> : null}
-            {showTouchHint ? <p className="v3-touch-hint">Swipe sideways, or hold a screen edge to travel.</p> : null}
-            <FooterNav activeSection={activeSection} onNavigate={requestNavigation} />
+            {activeSection === "home" ? <ControlsHint messages={messages} /> : null}
+            {showTouchHint ? <p className="v3-touch-hint">{messages.touchHint}</p> : null}
+            <FooterNav
+              activeSection={activeSection}
+              messages={messages}
+              onNavigate={requestNavigation}
+              sections={localizedContent.sections}
+            />
           </>
         ) : null}
 
         {isLoading && !fallback ? (
           <div aria-live="polite" className="v3-loading-screen">
             <div aria-hidden="true" className="v3-loading-dog" />
-            <p>Loading<span aria-hidden="true">...</span></p>
+            <p>{messages.loading}<span aria-hidden="true">...</span></p>
           </div>
         ) : null}
       </div>
@@ -657,6 +712,7 @@ export default function DayNightPortfolio() {
           closeButtonRef={closeButtonRef}
           dialogRef={dialogRef}
           item={modal.item}
+          messages={messages}
           onClose={closeModal}
           type={modal.type}
         />

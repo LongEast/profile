@@ -115,6 +115,47 @@ body.v3-page #root {
   outline-offset: 0.15rem;
 }
 
+.v3-language-switcher {
+  position: fixed;
+  z-index: 11;
+  top: 1.15rem;
+  right: clamp(7.2rem, 10vw, 10.5rem);
+  display: flex;
+  gap: 0.12rem;
+  padding: 0.18rem;
+  border: 1px solid var(--v3-line);
+  border-radius: 0.55rem;
+  color: var(--v3-ink);
+  background: color-mix(in srgb, var(--v3-surface) 92%, transparent);
+  box-shadow: 2px 2px 0 color-mix(in srgb, var(--v3-muted) 28%, transparent);
+  transition: color 500ms ease, background-color 500ms ease, border-color 500ms ease;
+}
+
+.v3-language-switcher button {
+  min-width: 2.3rem;
+  padding: 0.28rem 0.48rem;
+  border: 0;
+  border-radius: 0.35rem;
+  color: var(--v3-muted);
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.82rem;
+  line-height: 1;
+  transition: color 160ms ease, background-color 160ms ease;
+}
+
+.v3-language-switcher button:hover,
+.v3-language-switcher button:focus-visible {
+  color: var(--v3-ink);
+  outline: 1px dashed var(--v3-ink);
+  outline-offset: -2px;
+}
+
+.v3-language-switcher button.is-active {
+  color: var(--v3-background);
+  background: var(--v3-ink);
+}
+
 .v3-celestial-pulley__bar {
   position: absolute;
   z-index: 3;
@@ -1460,6 +1501,11 @@ body.v3-page #root {
     right: 0.3rem;
     width: 4.2rem;
     height: 6.3rem;
+  }
+
+  .v3-language-switcher {
+    top: 0.8rem;
+    right: 5.2rem;
   }
 
   .v3-controls-hint {

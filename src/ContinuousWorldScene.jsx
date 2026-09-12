@@ -575,6 +575,7 @@ function SceneContents({
   activeTheme,
   blocked,
   initialSection,
+  locale,
   navigationRequest,
   onOpenAward,
   onOpenExperience,
@@ -607,6 +608,7 @@ function SceneContents({
       <ShadowFloor activeNight={activeNight} playerRef={playerRef} />
       <GalleryWorld
         activeNight={activeNight}
+        locale={locale}
         motionRef={motionRef}
         onOpenAward={onOpenAward}
         onOpenExperience={onOpenExperience}
@@ -640,6 +642,7 @@ export default function ContinuousWorldScene({
   activeTheme = "day",
   blocked = false,
   initialSection = "home",
+  locale = "en",
   navigationRequest = null,
   onOpenAward,
   onOpenExperience,
@@ -661,6 +664,7 @@ export default function ContinuousWorldScene({
         activeTheme={activeTheme}
         blocked={blocked}
         initialSection={initialSection}
+        locale={locale}
         navigationRequest={navigationRequest}
         onOpenAward={onOpenAward}
         onOpenExperience={onOpenExperience}

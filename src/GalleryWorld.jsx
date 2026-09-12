@@ -2,7 +2,7 @@ import { useMemo, useRef } from "react";
 import { Edges, Html } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
-import { awards, experiences, profile, projects } from "./content";
+import { getLocalizedContent, getMessages } from "./i18n";
 import {
   EXHIBIT_LAYOUT,
   TILE_WIDTH,
@@ -294,7 +294,7 @@ function GalleryTile({ activeNight, baseX, index, playerRef }) {
   );
 }
 
-function HeroExhibit({ activeNight, playerRef }) {
+function HeroExhibit({ activeNight, messages, playerRef, profile }) {
   const { size } = useThree();
   const isNarrow = size.width <= 680;
 
@@ -306,7 +306,7 @@ function HeroExhibit({ activeNight, playerRef }) {
         distanceFactor={11}
         position={[isNarrow ? 0 : -5.1, isNarrow ? 5.9 : 6.25, -6.72]}
       >
-        <p className="v3-world-hero-kicker">Hi, I'm</p>
+        <p className="v3-world-hero-kicker">{messages.hello}</p>
         <h1>{profile.name}</h1>
         <p className="v3-world-hero-headline">{profile.headline}</p>
         <p className="v3-world-hero-intro">{profile.introduction}</p>
@@ -315,7 +315,7 @@ function HeroExhibit({ activeNight, playerRef }) {
   );
 }
 
-function EducationExhibit({ activeNight, playerRef }) {
+function EducationExhibit({ activeNight, messages, playerRef, profile }) {
   return (
     <CircularSlot baseX={EXHIBIT_LAYOUT.home.education} playerRef={playerRef}>
       <OutlinedBox
@@ -331,7 +331,7 @@ function EducationExhibit({ activeNight, playerRef }) {
         distanceFactor={10}
         position={[0, 5.05, -6.6]}
       >
-        <p className="v3-world-eyebrow">Education</p>
+        <p className="v3-world-eyebrow">{messages.education}</p>
         {profile.education.map((item) => (
           <section key={item.institution}>
             <h2>{item.institution}</h2>
@@ -344,7 +344,7 @@ function EducationExhibit({ activeNight, playerRef }) {
   );
 }
 
-function ContactExhibit({ activeNight, onOpenUnavailableLink, playerRef }) {
+function ContactExhibit({ activeNight, messages, onOpenUnavailableLink, playerRef, profile }) {
   return (
     <CircularSlot baseX={EXHIBIT_LAYOUT.home.contact} playerRef={playerRef}>
       <OutlinedBox
@@ -371,9 +371,9 @@ function ContactExhibit({ activeNight, onOpenUnavailableLink, playerRef }) {
         distanceFactor={9}
         position={[0, 4.55, -6.2]}
       >
-        <p className="v3-world-eyebrow">Find me online</p>
-        <h2>Let&apos;s make something thoughtful.</h2>
-        <nav aria-label="Zhuolin Li contact links">
+        <p className="v3-world-eyebrow">{messages.findMeOnline}</p>
+        <h2>{messages.contactHeading}</h2>
+        <nav aria-label={messages.contactLinks}>
           {profile.links.map((link) => {
             const label = (
               <span className="v3-world-control-label">
@@ -467,7 +467,7 @@ function AwardSculpture({ activeNight, index }) {
   );
 }
 
-function AwardExhibit({ activeNight, award, baseX, index, onOpen, playerRef }) {
+function AwardExhibit({ activeNight, award, baseX, index, messages, onOpen, playerRef }) {
   const open = () => onOpen?.(award);
 
   return (
@@ -505,7 +505,7 @@ function AwardExhibit({ activeNight, award, baseX, index, onOpen, playerRef }) {
         distanceFactor={8.5}
         position={[0, 3.55 + (index % 2) * 0.2, -3.25]}
       >
-        <button aria-label={`Open ${award.title} details`} onClick={open} type="button">
+        <button aria-label={messages.openDetails(award.title)} onClick={open} type="button">
           <strong>{award.title}</strong>
           <span>{award.placement}{award.date ? ` · ${award.date}` : ""}</span>
         </button>
@@ -514,12 +514,12 @@ function AwardExhibit({ activeNight, award, baseX, index, onOpen, playerRef }) {
   );
 }
 
-function ProjectDiagram({ art }) {
+function ProjectDiagram({ art, messages }) {
   if (art === "uslike") {
     return (
       <div className="v3-world-project-art v3-world-project-art--uslike">
         <img
-          alt="Monochrome Uslike landing-page composition with matching cards and conversation prompts"
+          alt={messages.projectPreviewAlt}
           src="/assets/v3/uslike-interface.svg"
         />
       </div>
@@ -537,7 +537,7 @@ function ProjectDiagram({ art }) {
   );
 }
 
-function ProjectExhibit({ activeNight, baseX, onOpen, playerRef, project }) {
+function ProjectExhibit({ activeNight, baseX, messages, onOpen, playerRef, project }) {
   const open = () => onOpen?.(project);
 
   return (
@@ -573,11 +573,11 @@ function ProjectExhibit({ activeNight, baseX, onOpen, playerRef, project }) {
           <p className="v3-world-eyebrow">{project.eyebrow}</p>
           <h2>{project.title}</h2>
           <p>{project.summary}</p>
-          <ul aria-label={`${project.title} technologies`}>
+          <ul aria-label={messages.projectTechnologies(project.title)}>
             {project.tags.map((tag) => <li key={tag}>{tag}</li>)}
           </ul>
           <div className="v3-world-project-actions">
-            <button onClick={open} type="button"><span className="v3-world-control-label">Explore project</span></button>
+            <button onClick={open} type="button"><span className="v3-world-control-label">{messages.exploreProject}</span></button>
             {project.links.map((link) => (
               <a
                 href={link.href}
@@ -590,7 +590,7 @@ function ProjectExhibit({ activeNight, baseX, onOpen, playerRef, project }) {
             ))}
           </div>
         </div>
-        <ProjectDiagram art={project.art} />
+        <ProjectDiagram art={project.art} messages={messages} />
       </WorldHtml>
     </CircularSlot>
   );
@@ -616,7 +616,7 @@ function ExperienceGlyph({ activeNight, index }) {
   );
 }
 
-function ExperienceExhibit({ activeNight, baseX, experience, index, onOpen, playerRef }) {
+function ExperienceExhibit({ activeNight, baseX, experience, index, messages, onOpen, playerRef }) {
   const open = () => onOpen?.(experience);
 
   return (
@@ -641,13 +641,13 @@ function ExperienceExhibit({ activeNight, baseX, experience, index, onOpen, play
         distanceFactor={10}
         position={[0, 6.1, -6.6]}
       >
-        <button aria-label={`Open ${experience.title} details`} onClick={open} type="button">
-          <span className="v3-world-eyebrow">{experience.date ?? "Experience"}</span>
+        <button aria-label={messages.openDetails(experience.title)} onClick={open} type="button">
+          <span className="v3-world-eyebrow">{experience.date ?? messages.experience}</span>
           <strong>{experience.title}</strong>
           <span>{experience.organization}</span>
           <span className="v3-world-meta">{experience.location}</span>
           <span>{experience.summary}</span>
-          <span className="v3-world-open-label">View details →</span>
+          <span className="v3-world-open-label">{messages.viewDetails} →</span>
         </button>
       </WorldHtml>
     </CircularSlot>
@@ -788,6 +788,7 @@ export function PlayerDog({ activeNight, motionRef, playerRef, reducedMotion }) 
 
 export function GalleryWorld({
   activeNight,
+  locale = "en",
   motionRef,
   onOpenAward,
   onOpenExperience,
@@ -796,6 +797,10 @@ export function GalleryWorld({
   playerRef,
   reducedMotion,
 }) {
+  const localizedContent = useMemo(() => getLocalizedContent(locale), [locale]);
+  const messages = getMessages(locale);
+  const { awards, experiences, profile, projects } = localizedContent;
+
   return (
     <>
       {GROUND_TILE_POSITIONS.map((baseX, index) => (
@@ -808,18 +813,20 @@ export function GalleryWorld({
         />
       ))}
 
-      <HeroExhibit activeNight={activeNight} playerRef={playerRef} />
-      <EducationExhibit activeNight={activeNight} playerRef={playerRef} />
+      <HeroExhibit activeNight={activeNight} messages={messages} playerRef={playerRef} profile={profile} />
+      <EducationExhibit activeNight={activeNight} messages={messages} playerRef={playerRef} profile={profile} />
       <ContactExhibit
         activeNight={activeNight}
+        messages={messages}
         onOpenUnavailableLink={onOpenUnavailableLink}
         playerRef={playerRef}
+        profile={profile}
       />
 
       <DirectionSign
         activeNight={activeNight}
         baseX={EXHIBIT_LAYOUT.awards.sign}
-        label="Awards"
+        label={messages.awards}
         playerRef={playerRef}
       />
       {awards.slice(0, EXHIBIT_LAYOUT.awards.items.length).map((award, index) => (
@@ -829,6 +836,7 @@ export function GalleryWorld({
           baseX={EXHIBIT_LAYOUT.awards.items[index]}
           index={index}
           key={award.id}
+          messages={messages}
           onOpen={onOpenAward}
           playerRef={playerRef}
         />
@@ -837,7 +845,7 @@ export function GalleryWorld({
       <DirectionSign
         activeNight={activeNight}
         baseX={EXHIBIT_LAYOUT.projects.sign}
-        label="Projects"
+        label={messages.projects}
         playerRef={playerRef}
       />
       {projects.slice(0, EXHIBIT_LAYOUT.projects.items.length).map((project, index) => (
@@ -845,6 +853,7 @@ export function GalleryWorld({
           activeNight={activeNight}
           baseX={EXHIBIT_LAYOUT.projects.items[index]}
           key={project.id}
+          messages={messages}
           onOpen={onOpenProject}
           playerRef={playerRef}
           project={project}
@@ -854,7 +863,7 @@ export function GalleryWorld({
       <DirectionSign
         activeNight={activeNight}
         baseX={EXHIBIT_LAYOUT.experience.sign}
-        label="Experience"
+        label={messages.experience}
         playerRef={playerRef}
       />
       {experiences.slice(0, EXHIBIT_LAYOUT.experience.items.length).map((experience, index) => (
@@ -864,6 +873,7 @@ export function GalleryWorld({
           experience={experience}
           index={index}
           key={experience.id}
+          messages={messages}
           onOpen={onOpenExperience}
           playerRef={playerRef}
         />
