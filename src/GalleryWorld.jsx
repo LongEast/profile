@@ -20,7 +20,7 @@ const DAY = {
   chip: "#e8e8e5",
   stone: "#aaa69e",
   stoneDark: "#77736d",
-  cat: "#111111",
+  dog: "#111111",
   eye: "#fbfbf8",
 };
 
@@ -34,7 +34,7 @@ const NIGHT = {
   chip: "#333332",
   stone: "#b9b9b3",
   stoneDark: "#777773",
-  cat: "#f2f2ee",
+  dog: "#f2f2ee",
   eye: "#151515",
 };
 
@@ -654,10 +654,10 @@ function ExperienceExhibit({ activeNight, baseX, experience, index, onOpen, play
   );
 }
 
-function CatPart({
+function DogPart({
   activeNight,
   args,
-  kind = "cat",
+  kind = "dog",
   name,
   position,
   rotation,
@@ -675,7 +675,7 @@ function CatPart({
   );
 }
 
-function GeometryCat({ activeNight, motionRef, reducedMotion }) {
+function GeometryDog({ activeNight, motionRef, reducedMotion }) {
   const visualRef = useRef(null);
   const bodyRef = useRef(null);
   const tailRef = useRef(null);
@@ -700,42 +700,41 @@ function GeometryCat({ activeNight, motionRef, reducedMotion }) {
       if (leg) leg.rotation.z = index % 2 === 0 ? stride : -stride;
     });
     if (tailRef.current) {
-      tailRef.current.rotation.z = -0.65 + (moving ? Math.sin(clock.elapsedTime * pace * 0.62) * 0.16 : 0);
+      tailRef.current.rotation.z = 0.72 + (moving ? Math.sin(clock.elapsedTime * pace * 0.86) * 0.24 : 0);
     }
   });
 
   return (
     <group position={[0, 0.03, 0]} ref={visualRef} scale={[0.72, 0.72, 0.72]}>
       <group ref={bodyRef}>
-        <CatPart activeNight={activeNight} name="v3-cat-body" position={[-0.06, 0.82, 0]} scale={[1.02, 0.55, 0.48]} />
-        <CatPart activeNight={activeNight} position={[0.62, 1.25, 0]} scale={[0.52, 0.5, 0.45]} />
-        <CatPart activeNight={activeNight} position={[0.96, 1.17, 0]} scale={[0.27, 0.2, 0.25]} />
-        <CatPart
+        <DogPart activeNight={activeNight} name="v3-dog-body" position={[-0.12, 0.82, 0]} scale={[1.12, 0.54, 0.5]} />
+        <DogPart activeNight={activeNight} position={[0.48, 1.03, 0]} scale={[0.48, 0.62, 0.47]} />
+        <DogPart activeNight={activeNight} position={[0.68, 1.4, 0]} scale={[0.55, 0.46, 0.45]} />
+        <DogPart activeNight={activeNight} position={[1.08, 1.28, 0]} scale={[0.43, 0.25, 0.32]} />
+        <DogPart
           activeNight={activeNight}
-          args={[0.19, 0.44, 4]}
-          position={[0.39, 1.72, -0.14]}
-          rotation={[0, 0, -0.12]}
-          shape="cone"
+          position={[0.43, 1.43, 0.28]}
+          rotation={[0.15, 0, 0.34]}
+          scale={[0.22, 0.44, 0.14]}
         />
-        <CatPart
+        <DogPart
           activeNight={activeNight}
-          args={[0.19, 0.44, 4]}
-          position={[0.78, 1.72, -0.14]}
-          rotation={[0, 0, 0.14]}
-          shape="cone"
+          kind="eye"
+          position={[1.43, 1.28, 0]}
+          scale={[0.13, 0.13, 0.17]}
         />
-        <CatPart
+        <DogPart
           activeNight={activeNight}
           args={[0.12, 7, 5]}
           kind="eye"
-          position={[0.78, 1.36, 0.4]}
+          position={[0.84, 1.51, 0.39]}
           scale={[1, 1, 0.38]}
         />
-        <CatPart
+        <DogPart
           activeNight={activeNight}
           args={[0.052, 7, 5]}
-          kind="cat"
-          position={[0.81, 1.36, 0.45]}
+          kind="dog"
+          position={[0.88, 1.51, 0.44]}
           scale={[1, 1, 0.35]}
         />
       </group>
@@ -750,28 +749,28 @@ function GeometryCat({ activeNight, motionRef, reducedMotion }) {
           position={[x, 0.49, z]}
           ref={(node) => { legRefs.current[index] = node; }}
         >
-          <CatPart
+          <DogPart
             activeNight={activeNight}
             args={[0.1, 0.13, 0.52, 6]}
             position={[0, -0.25, 0]}
             shape="cylinder"
           />
-          <CatPart activeNight={activeNight} position={[0.08, -0.51, 0]} scale={[0.2, 0.1, 0.16]} />
+          <DogPart activeNight={activeNight} position={[0.08, -0.51, 0]} scale={[0.2, 0.1, 0.16]} />
         </group>
       ))}
-      <group position={[-0.86, 1.02, 0]} ref={tailRef} rotation={[0, 0, -0.65]}>
-        <CatPart
+      <group position={[-1.08, 1.02, 0]} ref={tailRef} rotation={[0, 0, 0.72]}>
+        <DogPart
           activeNight={activeNight}
-          args={[0.12, 0.15, 0.72, 6]}
-          position={[-0.08, 0.35, 0]}
-          rotation={[0, 0, 0.18]}
+          args={[0.13, 0.16, 0.58, 6]}
+          position={[-0.04, 0.27, 0]}
+          rotation={[0, 0, 0.12]}
           shape="cylinder"
         />
-        <CatPart
+        <DogPart
           activeNight={activeNight}
-          args={[0.1, 0.12, 0.55, 6]}
-          position={[-0.23, 0.82, 0]}
-          rotation={[0, 0, 0.43]}
+          args={[0.08, 0.12, 0.4, 6]}
+          position={[-0.13, 0.66, 0]}
+          rotation={[0, 0, 0.34]}
           shape="cylinder"
         />
       </group>
@@ -779,10 +778,10 @@ function GeometryCat({ activeNight, motionRef, reducedMotion }) {
   );
 }
 
-export function PlayerCat({ activeNight, motionRef, playerRef, reducedMotion }) {
+export function PlayerDog({ activeNight, motionRef, playerRef, reducedMotion }) {
   return (
     <group position={[0, 0, 0]} ref={playerRef}>
-      <GeometryCat activeNight={activeNight} motionRef={motionRef} reducedMotion={reducedMotion} />
+      <GeometryDog activeNight={activeNight} motionRef={motionRef} reducedMotion={reducedMotion} />
     </group>
   );
 }
@@ -870,7 +869,7 @@ export function GalleryWorld({
         />
       ))}
 
-      <PlayerCat
+      <PlayerDog
         activeNight={activeNight}
         motionRef={motionRef}
         playerRef={playerRef}

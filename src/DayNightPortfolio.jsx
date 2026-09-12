@@ -625,7 +625,7 @@ export default function DayNightPortfolio() {
 
         {isLoading && !fallback ? (
           <div aria-live="polite" className="v3-loading-screen">
-            <div className="v3-loading-cat" />
+            <div aria-hidden="true" className="v3-loading-dog" />
             <p>Loading<span aria-hidden="true">...</span></p>
           </div>
         ) : null}

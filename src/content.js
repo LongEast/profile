@@ -17,7 +17,7 @@ export const palettes = {
     muted: "#77736c",
     surface: "#ffffff",
     line: "#aaa69e",
-    cat: "#111111",
+    dog: "#111111",
   },
   night: {
     id: "night",
@@ -27,7 +27,7 @@ export const palettes = {
     muted: "#aaa9a4",
     surface: "#1a1a19",
     line: "#777773",
-    cat: "#f2f2ee",
+    dog: "#f2f2ee",
   },
 };
 

@@ -948,19 +948,19 @@ body.v3-page #root {
   margin: 0;
 }
 
-.v3-loading-cat {
+.v3-loading-dog {
   width: 7rem;
   height: 7rem;
   margin: 0 auto;
-  background-image: url("/assets/v3/cat-walk.svg");
+  background-image: url("/assets/v3/dog-walk.svg");
   background-position: 0 0;
   background-repeat: no-repeat;
   background-size: 400% 100%;
   filter: brightness(0);
-  animation: v3-cat-walk 700ms steps(4) infinite;
+  animation: v3-dog-walk 700ms steps(4) infinite;
 }
 
-@keyframes v3-cat-walk {
+@keyframes v3-dog-walk {
   to { background-position: 133.333% 0; }
 }
 
@@ -1430,7 +1430,7 @@ body.v3-page #root {
     transition-duration: 1ms !important;
   }
 
-  .v3-loading-cat {
+  .v3-loading-dog {
     animation: none;
   }
 
