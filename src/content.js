@@ -70,7 +70,7 @@ export const sections = [
     theme: "night",
     anchor: 144,
     eyebrow: "Night / 04",
-    description: "Five milestones, arranged as a midnight gallery.",
+    description: "Two competition milestones, arranged as a midnight gallery.",
   },
 ];
 
@@ -137,15 +137,6 @@ export const awards = [
     exhibit: "route-map",
   },
   {
-    id: "imc-trading",
-    placement: "1st Place",
-    title: "IMC Trading Challenge",
-    organization: "MindPhair at ETH Zürich",
-    date: "Apr 2026",
-    detail: "First place in the IMC Trading Challenge.",
-    exhibit: "trading-board",
-  },
-  {
     id: "ai-pioneer",
     placement: "Top 3",
     title: "ByteDance & Milian AI Pioneer Future Talent Competition",
@@ -154,24 +145,6 @@ export const awards = [
     detail:
       "Built a real-time backend pipeline with persistent client connections, Redis-backed event ingestion, and asynchronous task processing.",
     exhibit: "signal-stack",
-  },
-  {
-    id: "deans-award",
-    placement: "Winner",
-    title: "Dean’s Award",
-    organization: "University of New South Wales",
-    date: "2025",
-    detail: "Dean’s Award Winner.",
-    exhibit: "laurel",
-  },
-  {
-    id: "icpc",
-    placement: "Top 15",
-    title: "ICPC Australia Preliminary Round",
-    organization: "Australia",
-    date: null,
-    detail: "Placed in the top 15 in Australia.",
-    exhibit: "code-grid",
   },
 ];
 

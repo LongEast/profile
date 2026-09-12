@@ -43,7 +43,7 @@ export const EXHIBIT_LAYOUT = {
   },
   awards: {
     sign: 134,
-    items: [144, 168, 192, 216, 240],
+    items: [140, 148],
   },
 };
 

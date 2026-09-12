@@ -100,7 +100,7 @@ const zhTranslations = {
     awards: {
       label: "获奖",
       eyebrow: "夜晚 / 04",
-      description: "陈列在午夜展厅里的五个里程碑。",
+      description: "陈列在午夜展厅里的两项竞赛成果。",
     },
   },
   profile: {
@@ -135,31 +135,12 @@ const zhTranslations = {
       date: "2026年7月",
       detail: "使用 Python 构建约束驱动的任务规划流程，通过候选搜索、确定性验证、有限重试与回退机制，在预算和行程约束下生成可行计划。",
     },
-    "imc-trading": {
-      placement: "第一名",
-      title: "IMC 交易挑战赛",
-      organization: "ETH Zürich MindPhair",
-      date: "2026年4月",
-      detail: "获得 IMC 交易挑战赛第一名。",
-    },
     "ai-pioneer": {
       placement: "前三名",
       title: "字节跳动 & 米连AI 先锋未来人才大赛",
       organization: "字节跳动 & 米连",
       date: "2026年8月",
       detail: "构建实时后端流程，包含持久客户端连接、基于 Redis 的事件接入和异步任务处理。",
-    },
-    "deans-award": {
-      placement: "获奖者",
-      title: "院长奖",
-      organization: "新南威尔士大学",
-      detail: "获得院长奖。",
-    },
-    icpc: {
-      placement: "前15名",
-      title: "ICPC 澳大利亚预选赛",
-      organization: "澳大利亚",
-      detail: "获得澳大利亚赛区前15名。",
     },
   },
   projects: {
