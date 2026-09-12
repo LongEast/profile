@@ -144,8 +144,8 @@ const zhTranslations = {
     },
     "ai-pioneer": {
       placement: "前三名",
-      title: "字节跳动 & Milian AI 先锋未来人才大赛",
-      organization: "字节跳动 & Milian",
+      title: "字节跳动 & 米连AI 先锋未来人才大赛",
+      organization: "字节跳动 & 米连",
       date: "2026年8月",
       detail: "构建实时后端流程，包含持久客户端连接、基于 Redis 的事件接入和异步任务处理。",
     },

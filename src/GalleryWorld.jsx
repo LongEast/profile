@@ -567,6 +567,46 @@ function ProjectDiagram({ art, messages }) {
     );
   }
 
+  if (art === "urbantrip") {
+    return (
+      <div aria-hidden="true" className="v3-world-project-art v3-world-project-art--urbantrip">
+        <svg className="v3-route-preview" viewBox="0 0 260 150">
+          <g className="v3-route-preview__pipeline">
+            <rect height="19" rx="3" width="61" x="8" y="9" />
+            <text x="18" y="22">RETRIEVE</text>
+            <path d="M72 18h14m-5-4 5 4-5 4" />
+            <rect height="19" rx="3" width="46" x="90" y="9" />
+            <text x="100" y="22">PLAN</text>
+            <path d="M139 18h14m-5-4 5 4-5 4" />
+            <rect height="19" rx="3" width="53" x="157" y="9" />
+            <text x="166" y="22">CHECK</text>
+          </g>
+          <g className="v3-route-preview__constraints">
+            <rect height="15" rx="7" width="47" x="12" y="39" />
+            <text x="21" y="49">BUDGET</text>
+            <rect height="15" rx="7" width="43" x="64" y="39" />
+            <text x="74" y="49">HOTEL</text>
+            <rect height="15" rx="7" width="38" x="112" y="39" />
+            <text x="122" y="49">TIME</text>
+          </g>
+          <path className="v3-route-preview__route" d="M29 116C62 73 88 130 121 89S176 63 220 103" />
+          <g className="v3-route-preview__stops">
+            <circle cx="29" cy="116" r="12" />
+            <text x="26" y="120">1</text>
+            <circle cx="121" cy="89" r="12" />
+            <text x="118" y="93">2</text>
+            <circle cx="220" cy="103" r="12" />
+            <text x="217" y="107">3</text>
+          </g>
+          <g className="v3-route-preview__validation">
+            <rect height="22" rx="2" width="64" x="174" y="122" />
+            <text x="185" y="137">VALID ✓</text>
+          </g>
+        </svg>
+      </div>
+    );
+  }
+
   if (art === "mobile-agent") {
     return (
       <div aria-hidden="true" className="v3-world-project-art v3-world-project-art--mobile-agent">

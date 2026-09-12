@@ -1151,9 +1151,77 @@ body.v3-page #root {
 .v3-world-art-line--a { top: 52px; left: 45px; width: 112px; transform: rotate(31deg); }
 .v3-world-art-line--b { top: 111px; left: 97px; width: 75px; transform: rotate(-48deg); }
 
-.v3-world-project-art--urbantrip .v3-world-art-line--a {
-  width: 148px;
-  transform: rotate(14deg);
+.v3-world-project-art--urbantrip {
+  color: var(--v3-world-ink);
+  background:
+    linear-gradient(90deg, transparent 49.5%, color-mix(in srgb, var(--v3-world-ink) 6%, transparent) 49.5% 50%, transparent 50%),
+    linear-gradient(transparent 49.5%, color-mix(in srgb, var(--v3-world-ink) 6%, transparent) 49.5% 50%, transparent 50%),
+    var(--v3-world-paper);
+}
+
+.v3-route-preview {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  color: inherit;
+  font-family: "DM Mono", monospace;
+}
+
+.v3-route-preview rect,
+.v3-route-preview circle,
+.v3-route-preview path {
+  stroke: currentColor;
+  vector-effect: non-scaling-stroke;
+}
+
+.v3-route-preview rect,
+.v3-route-preview circle {
+  fill: var(--v3-world-paper);
+}
+
+.v3-route-preview text {
+  fill: currentColor;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.v3-route-preview__pipeline path {
+  fill: none;
+  stroke-width: 1;
+}
+
+.v3-route-preview__constraints rect {
+  fill: var(--v3-world-chip);
+  stroke-width: 1;
+}
+
+.v3-route-preview__constraints text { font-size: 6px; }
+
+.v3-route-preview__route {
+  fill: none;
+  stroke-width: 2;
+  stroke-dasharray: 6 4;
+  stroke-linecap: round;
+}
+
+.v3-route-preview__stops circle {
+  stroke-width: 2;
+}
+
+.v3-route-preview__stops text {
+  font-size: 9px;
+}
+
+.v3-route-preview__validation rect {
+  fill: var(--v3-world-ink);
+  stroke-width: 1;
+}
+
+.v3-route-preview__validation text {
+  fill: var(--v3-world-paper);
+  font-size: 8px;
 }
 
 .v3-world-project-art--cohort .v3-world-art-node {
