@@ -17,7 +17,7 @@ export const palettes = {
     muted: "#77736c",
     surface: "#ffffff",
     line: "#aaa69e",
-    cat: "#111111",
+    dog: "#111111",
   },
   night: {
     id: "night",
@@ -27,7 +27,7 @@ export const palettes = {
     muted: "#aaa9a4",
     surface: "#1a1a19",
     line: "#777773",
-    cat: "#f2f2ee",
+    dog: "#f2f2ee",
   },
 };
 
@@ -47,12 +47,12 @@ export const sections = [
   },
   {
     id: "experience",
-    label: "Experience",
+    label: "Internships",
     hash: "#experience",
     theme: "night",
     anchor: 42,
     eyebrow: "Night / 02",
-    description: "Learning, teaching, and quantitative-program milestones.",
+    description: "Full-stack AI agent, RAG, and industrial LLM internships.",
   },
   {
     id: "projects",
@@ -61,7 +61,7 @@ export const sections = [
     theme: "day",
     anchor: 72,
     eyebrow: "Day / 03",
-    description: "Things made for people, plans, and data.",
+    description: "AI agents, product prototypes, and enterprise tools.",
   },
   {
     id: "awards",
@@ -70,7 +70,7 @@ export const sections = [
     theme: "night",
     anchor: 144,
     eyebrow: "Night / 04",
-    description: "Five milestones, arranged as a midnight gallery.",
+    description: "Two competition milestones, arranged as a midnight gallery.",
   },
 ];
 
@@ -137,15 +137,6 @@ export const awards = [
     exhibit: "route-map",
   },
   {
-    id: "imc-trading",
-    placement: "1st Place",
-    title: "IMC Trading Challenge",
-    organization: "MindPhair at ETH Zürich",
-    date: "Apr 2026",
-    detail: "First place in the IMC Trading Challenge.",
-    exhibit: "trading-board",
-  },
-  {
     id: "ai-pioneer",
     placement: "Top 3",
     title: "ByteDance & Milian AI Pioneer Future Talent Competition",
@@ -155,45 +146,79 @@ export const awards = [
       "Built a real-time backend pipeline with persistent client connections, Redis-backed event ingestion, and asynchronous task processing.",
     exhibit: "signal-stack",
   },
-  {
-    id: "deans-award",
-    placement: "Winner",
-    title: "Dean’s Award",
-    organization: "University of New South Wales",
-    date: "2025",
-    detail: "Dean’s Award Winner.",
-    exhibit: "laurel",
-  },
-  {
-    id: "icpc",
-    placement: "Top 15",
-    title: "ICPC Australia Preliminary Round",
-    organization: "Australia",
-    date: null,
-    detail: "Placed in the top 15 in Australia.",
-    exhibit: "code-grid",
-  },
 ];
 
 export const projects = [
   {
-    id: "uslike",
-    eyebrow: "Relationship product",
-    title: "Uslike",
+    id: "urbantrip",
+    eyebrow: "Agent systems",
+    title: "UrbanTrip · TPC@IJCAI 1st Place",
     summary:
-      "A relationship-matching website designed to turn a match into a better conversation.",
+      "An end-to-end AI planning agent for feasible travel itineraries under complex real-world constraints.",
+    detail:
+      "UrbanTrip converts natural-language travel requirements into executable, validated plans while accounting for budgets, hotel requirements, attraction opening hours, transport modes, and visit order.",
+    details: [
+      "Developed an end-to-end AI planning agent that parses natural-language requirements into a structured Task State, then executes a complete Retrieval → Planning → Tool/API Execution → Validation → Fallback workflow.",
+      "Established agent quality controls with JSON Schema, Structured Output, validators, and timeout handling. Distinguished formatting, constraint, and execution failures, then fed the error causes back into subsequent planning to improve stability on complex tasks.",
+      "Built automated evaluation and regression tests covering 1,000 queries. Categorised formatting errors, constraint violations, time conflicts, budget overruns, and execution timeouts to continuously analyse agent strategy performance.",
+    ],
+    tags: ["Python", "LLM agents", "Structured output", "Evaluation"],
+    art: "urbantrip",
+    links: [
+      {
+        label: "View source",
+        href: "https://github.com/suzuran555/travel",
+        external: true,
+      },
+    ],
+  },
+  {
+    id: "atlassian-home-dashboard",
+    eyebrow: "Enterprise collaboration",
+    title: "Atlassian Home Dashboard Gadget",
+    organization: "Atlassian Industry Collaboration Project",
+    date: "Jun 2026 – Aug 2026",
+    summary:
+      "Migrated a Jira Space Gadget to Atlassian Home Dashboard and delivered the remaining full-stack integration with Forge.",
+    detail:
+      "A full-stack enterprise dashboard gadget delivered with Atlassian Forge, Figma, and an AI-assisted design-to-development workflow.",
+    details: [
+      "Worked with Atlassian’s enterprise team to migrate and adapt an existing Jira Space Gadget for Atlassian Home Dashboard. Reused official Atlassian components and independently implemented the remaining frontend, backend, and page-integration logic with Atlassian Forge.",
+      "Designed the product storyboard and interaction flow in Figma, then connected design context to development through Codex + Figma MCP. Completed the end-to-end process from requirement analysis and product design to AI-assisted full-stack implementation and final delivery, collaborating directly with Atlassian product owners throughout rollout.",
+    ],
+    tags: ["Figma", "Codex", "Full-stack"],
+    art: "dashboard",
+    links: [
+      {
+        label: "Watch group demo",
+        href: "https://drive.google.com/file/d/1bm0b-WfXO7EZiwS5iTcek602-Nzea1_Z/view?usp=drive_link",
+        external: true,
+      },
+    ],
+  },
+  {
+    id: "uslike",
+    eyebrow: "AI matching product · Top 300 / 4,000 teams",
+    title: "Uslike",
+    organization: "Feishu Competition · Milian Industry Challenge",
+    date: "Jul 2026 – Present",
+    summary:
+      "An AI matching and relationship-building platform shaped through product discovery, prototyping, and competition feedback.",
     detail:
       "Uslike pairs people through shared interests and brainwave-style questions, then uses mutual reveals and rooms as gentle icebreakers for deeper conversation and connection.",
-    tags: ["React", "FastAPI", "Tailwind CSS", "Matching flows"],
+    details: [
+      "Led the project and decomposed the complete AI product workflow from scratch, owning AI capability design, application-flow design, frontend prototype implementation, and solution iteration. Worked directly with corporate product managers to refine the product around user value, technical feasibility, and competition feedback; the project advanced to the top 300 out of 4,000 teams.",
+    ],
+    tags: ["React", "FastAPI", "AI product design", "Frontend prototype"],
     art: "uslike",
     links: [
       {
-        label: "View landing page",
-        href: "https://uslike-landing-public.vercel.app/",
+        label: "View product documentation",
+        href: "https://jcnj02b8aim1.feishu.cn/wiki/If03wW7ybiuwkxkorCMcMK38n0e",
         external: true,
       },
       {
-        label: "Open live app",
+        label: "Open frontend prototype",
         href: "https://uslike-dat0.onrender.com/",
         external: true,
         note: "The deployment may be unavailable while its hosting credits are paused.",
@@ -206,37 +231,27 @@ export const projects = [
     ],
   },
   {
-    id: "urbantrip",
-    eyebrow: "Agent systems",
-    title: "UrbanTrip",
+    id: "mobile-ad-agent",
+    eyebrow: "Mobile AI automation · Independent project",
+    title: "Cross-App Mobile Ad Recognition Agent",
+    organization: "Independent Project",
+    date: "Jul 2026 – Aug 2026",
     summary:
-      "A constraint-aware agent for building feasible multi-city itineraries across China.",
+      "A modular mobile AI automation system for detecting ads across social and short-video feeds.",
     detail:
-      "UrbanTrip turns natural-language travel constraints into coherent plans that account for intercity travel, local routing, timing, budgets, and recommendations.",
-    tags: ["Python", "LLM agents", "Constraint planning"],
-    art: "urbantrip",
+      "The agent automates scrolling, screenshots, UI Tree/OCR parsing, and ad classification across Weibo, Xiaohongshu, and short-video feeds.",
+    details: [
+      "Abstracted heterogeneous app page structures behind unified Observation, Action, and Extraction interfaces.",
+      "Designed UI Tree, OCR, visual embeddings, and AI models as independently replaceable perception and reasoning modules. Combined page text with visual signals, then compared rule-based, retrieval/ML, and AI-model approaches across platforms for recognition quality and runtime cost.",
+      "Built a session-based data pipeline for screenshots, UI text, OCR output, content regions, and metadata. Reduced duplicates through cross-frame deduplication and collected and manually reviewed about 400 posts and videos for model development and testing.",
+      "Established Precision, Recall, F1, False Positive Rate, and Invalid Output Rate metrics, and performed structured root-cause analysis on bad cases.",
+    ],
+    tags: ["Mobile automation", "OCR", "Visual embeddings", "Evaluation"],
+    art: "mobile-agent",
     links: [
       {
         label: "View source",
-        href: "https://github.com/suzuran555/travel",
-        external: true,
-      },
-    ],
-  },
-  {
-    id: "cohort-builder",
-    eyebrow: "Clinical data tooling",
-    title: "Hip Fracture Cohort Builder",
-    summary:
-      "A clinical data exploration tool with Boolean cohort search and visual analysis.",
-    detail:
-      "A focused interface for defining hip-fracture cohorts with Boolean logic, then examining the resulting population through visual analysis.",
-    tags: ["Boolean search", "Clinical data", "Visual analysis"],
-    art: "cohort",
-    links: [
-      {
-        label: "Open project",
-        href: "https://hip-fracture-cohort-builder.vercel.app/",
+        href: "https://github.com/LongEast/mobile-ad-agent",
         external: true,
       },
     ],
@@ -245,57 +260,52 @@ export const projects = [
 
 export const experiences = [
   {
-    id: "eth-exchange",
-    title: "ETH Zürich Exchange",
-    organization: "ETH Zürich · Department of Computer Science (D-INFK)",
-    location: "Zürich, Switzerland",
-    date: "2026",
-    summary: "Exchange Semester · GPA 5.9/6.",
-    details: ["Awarded the highest-tier Alumni Exchange Scholarship."],
-    exhibit: "alpine-window",
-  },
-  {
-    id: "unsw-tutoring",
-    title: "UNSW Tutoring",
-    organization: "University of New South Wales",
-    location: "Sydney, Australia",
-    date: null,
-    summary: "Tutor for Algorithm Design (COMP3121) and Database Systems (COMP3311).",
-    details: [],
-    exhibit: "chalkboard",
-  },
-  {
-    id: "optiver-futurefocus",
-    title: "Optiver FutureFocus Program",
-    organization: "Optiver",
-    location: "Sydney, Australia",
-    date: "May 2026",
+    id: "pikpop-ai-agent",
+    title: "AI Agent Development Intern",
+    organization: "PikPop · Hangzhou Zhimao Xingtu",
+    location: "Hangzhou, China",
+    date: "Aug 2026 – Present",
     summary:
-      "Implemented components of a high-throughput exchange backend.",
+      "Built and debugged full-stack AI agent workflows for a cross-border commerce platform.",
     details: [
-      "Worked on deterministic order-book processing, TCP client/server communication, and Protobuf-based market-data messaging.",
-      "Stress-tested the exchange at 5,000+ messages per second while validating order-state consistency and reliable market-data delivery.",
+      "Helped develop an all-in-one AI commerce platform for cross-border e-commerce. Multi-agent workflows covered product discovery, supplier matching, product design, and marketing asset generation; contributed across frontend interactions, backend services, agent workflows, and production debugging.",
+      "Refactored the core Prompt Composer for complex combinations of agent runtime, message-queue, attachment-upload, inquiry, and workflow states. Unified scattered submission paths and connected the full message lifecycle from editing and enqueueing through automatic dequeueing and final delivery, while preserving user state across failures, rate limits, and cancellations.",
+      "Investigated production bad cases and regressions by tracing abnormal conversations, frontend/backend state flows, and Git history. Identified historical issues in attachment handling and page rendering, then designed compatibility fixes aligned with existing product flows.",
     ],
-    exhibit: "order-book",
+    links: [
+      {
+        label: "View product",
+        href: "https://pikpop.ai/en/home",
+        external: true,
+      },
+    ],
+    exhibit: "signal-stack",
   },
   {
-    id: "jane-street-see",
-    title: "Jane Street SEE Program",
-    organization: "Jane Street",
-    location: "Hong Kong",
-    date: "Jul 2026",
-    summary: "Participated in the Jane Street SEE Program.",
-    details: [],
+    id: "tpg-llm-application",
+    title: "LLM Application Intern",
+    organization: "TPG Telecom",
+    location: "Australia",
+    date: "Nov 2025 – Jan 2026",
+    summary:
+      "Built data and evaluation pipelines for an enterprise knowledge-base RAG/LLM application.",
+    details: [
+      "Built the knowledge-base data pipeline for an enterprise RAG/LLM application, including PDF and Word parsing, chunking, metadata modelling, and the end-to-end path from enterprise documents to model-retrievable context.",
+      "Helped create a Query–Expected Answer–Badcase evaluation set and assessed retrieval recall, answer accuracy, completeness, citation correctness, and output stability. Categorised failures into missing retrieval, incorrect retrieval, context conflicts, and incorrect citations to support strategy improvements.",
+    ],
     exhibit: "probability-table",
   },
   {
-    id: "sig-visiting",
-    title: "Susquehanna International Group Visiting Program",
-    organization: "Susquehanna International Group (SIG)",
-    location: "Sydney, Australia",
-    date: "Aug 2026",
-    summary: "Participated in the SIG Visiting Program.",
-    details: [],
+    id: "shengruan-llm",
+    title: "Large Language Model Intern",
+    organization: "Shengruan Technology · Intelligent Oil & Gas Fracturing Project",
+    date: "Aug 2025 – Oct 2025",
+    summary:
+      "Built training-data and offline-evaluation pipelines for industrial time-series models.",
+    details: [
+      "Owned the training-data pipeline for industrial time-series models. Resolved inconsistent field definitions, timestamp misalignment, missing values, and anomalous noise through data cleaning, temporal alignment, anomaly detection, and feature construction.",
+      "Built training and validation datasets plus an offline evaluation pipeline to compare data-processing and feature configurations using MAE, RMSE, MAPE, and R², then used experiment results to select models and parameters.",
+    ],
     exhibit: "market-ticker",
   },
 ];

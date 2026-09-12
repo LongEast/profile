@@ -1,4 +1,4 @@
-export const TRACK_LENGTH = 288;
+export const TRACK_LENGTH = 174;
 export const TILE_WIDTH = 12;
 export const SLOT_WRAP_BUFFER = 12;
 
@@ -23,7 +23,7 @@ export const WORLD_SECTIONS = [
   { id: "experience", anchor: 42, rangeStart: 34, phase: "night" },
   { id: "projects", anchor: 72, rangeStart: 58, phase: "day" },
   { id: "awards", anchor: 144, rangeStart: 132, phase: "night" },
-  { id: "home", anchor: 0, rangeStart: 258, phase: "day" },
+  { id: "home", anchor: 0, rangeStart: 166, phase: "day" },
 ];
 
 // Every exhibit owns its own circular slot. Sections are navigation ranges only.
@@ -35,15 +35,15 @@ export const EXHIBIT_LAYOUT = {
   },
   experience: {
     sign: 32,
-    items: [34, 38, 42, 46, 50],
+    items: [33, 42, 51],
   },
   projects: {
     sign: 59,
-    items: [72, 96, 120],
+    items: [72, 88, 104, 120],
   },
   awards: {
     sign: 134,
-    items: [144, 168, 192, 216, 240],
+    items: [140, 148],
   },
 };
 

@@ -162,7 +162,7 @@ function CameraRig({ motionRef, playerRef, reducedMotion, testStateRef }) {
 
     const lookHeight = size.height < 500 ? 3 : 4;
     camera.position.set(cameraState.x, player.position.y + 5.5, player.position.z + 25);
-    // Look at the spring centre rather than the cat: the room never yaws while catching up.
+    // Look at the spring centre rather than the dog: the room never yaws while catching up.
     camera.lookAt(cameraState.x, player.position.y + lookHeight, player.position.z);
     testStateRef.current.cameraX = cameraState.x;
     testStateRef.current.cameraYaw = camera.rotation.y;
@@ -491,7 +491,15 @@ function MovementController({
         : TRACK_LENGTH - shortDistance;
 
       if (shortDistance < ARRIVAL_THRESHOLD) {
+        player.position.x += shortDelta;
         autopilotRef.current = null;
+        input.wheelVelocity = 0;
+        input.touchMomentum = 0;
+        input.pendingWheel = 0;
+        input.swipeDelta = 0;
+        updateMotion(motionRef, 0);
+        reportPosition({ autopilotRef, lastSectionRef, motionRef, onSectionChange, player, testStateRef, velocity: 0 });
+        return;
       } else {
         const velocity = autopilot.direction * autopilotSpeed(distance);
         input.wheelVelocity = velocity;
@@ -542,7 +550,7 @@ function MovementController({
 
 function TestBridge({ activeNight, testStateRef }) {
   const { camera, gl, scene, size } = useThree();
-  const projectedCat = useMemo(() => new THREE.Vector3(), []);
+  const projectedDog = useMemo(() => new THREE.Vector3(), []);
 
   useFrame(() => {
     testStateRef.current.phase = activeNight ? "night" : "day";
@@ -550,13 +558,13 @@ function TestBridge({ activeNight, testStateRef }) {
       ? scene.background
       : gl.getClearColor(new THREE.Color());
     testStateRef.current.clearColor = `#${color.getHexString()}`;
-    const catBody = scene.getObjectByName("v3-cat-body");
-    if (catBody?.material?.color) {
-      testStateRef.current.catColor = `#${catBody.material.color.getHexString()}`;
-      catBody.getWorldPosition(projectedCat);
-      projectedCat.project(camera);
-      testStateRef.current.catScreenX = (projectedCat.x + 1) * size.width / 2;
-      testStateRef.current.catScreenY = (1 - projectedCat.y) * size.height / 2;
+    const dogBody = scene.getObjectByName("v3-dog-body");
+    if (dogBody?.material?.color) {
+      testStateRef.current.dogColor = `#${dogBody.material.color.getHexString()}`;
+      dogBody.getWorldPosition(projectedDog);
+      projectedDog.project(camera);
+      testStateRef.current.dogScreenX = (projectedDog.x + 1) * size.width / 2;
+      testStateRef.current.dogScreenY = (1 - projectedDog.y) * size.height / 2;
     }
   });
 
@@ -572,9 +580,10 @@ function TestBridge({ activeNight, testStateRef }) {
 }
 
 function SceneContents({
-  activeSection,
+  activeTheme,
   blocked,
   initialSection,
+  locale,
   navigationRequest,
   onOpenAward,
   onOpenExperience,
@@ -583,7 +592,7 @@ function SceneContents({
   onSectionChange,
   reducedMotion,
 }) {
-  const activeNight = activeSection === "awards" || activeSection === "experience";
+  const activeNight = activeTheme === "night";
   const playerRef = useRef(null);
   const motionRef = useRef({ moving: false, direction: 1, speed: 0 });
   const testStateRef = useRef({
@@ -596,7 +605,7 @@ function SceneContents({
     activeSection: initialSection,
     phase: activeNight ? "night" : "day",
     clearColor: activeNight ? NIGHT_BACKGROUND : DAY_BACKGROUND,
-    catColor: activeNight ? "#f2f2ee" : "#111111",
+    dogColor: activeNight ? "#f2f2ee" : "#111111",
     autopilot: null,
   });
 
@@ -607,6 +616,7 @@ function SceneContents({
       <ShadowFloor activeNight={activeNight} playerRef={playerRef} />
       <GalleryWorld
         activeNight={activeNight}
+        locale={locale}
         motionRef={motionRef}
         onOpenAward={onOpenAward}
         onOpenExperience={onOpenExperience}
@@ -637,9 +647,10 @@ function SceneContents({
 }
 
 export default function ContinuousWorldScene({
-  activeSection = "home",
+  activeTheme = "day",
   blocked = false,
   initialSection = "home",
+  locale = "en",
   navigationRequest = null,
   onOpenAward,
   onOpenExperience,
@@ -658,9 +669,10 @@ export default function ContinuousWorldScene({
       shadows
     >
       <SceneContents
-        activeSection={activeSection}
+        activeTheme={activeTheme}
         blocked={blocked}
         initialSection={initialSection}
+        locale={locale}
         navigationRequest={navigationRequest}
         onOpenAward={onOpenAward}
         onOpenExperience={onOpenExperience}
