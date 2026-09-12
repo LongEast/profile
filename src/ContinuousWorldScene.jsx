@@ -572,7 +572,7 @@ function TestBridge({ activeNight, testStateRef }) {
 }
 
 function SceneContents({
-  activeSection,
+  activeTheme,
   blocked,
   initialSection,
   navigationRequest,
@@ -583,7 +583,7 @@ function SceneContents({
   onSectionChange,
   reducedMotion,
 }) {
-  const activeNight = activeSection === "awards" || activeSection === "experience";
+  const activeNight = activeTheme === "night";
   const playerRef = useRef(null);
   const motionRef = useRef({ moving: false, direction: 1, speed: 0 });
   const testStateRef = useRef({
@@ -637,7 +637,7 @@ function SceneContents({
 }
 
 export default function ContinuousWorldScene({
-  activeSection = "home",
+  activeTheme = "day",
   blocked = false,
   initialSection = "home",
   navigationRequest = null,
@@ -658,7 +658,7 @@ export default function ContinuousWorldScene({
       shadows
     >
       <SceneContents
-        activeSection={activeSection}
+        activeTheme={activeTheme}
         blocked={blocked}
         initialSection={initialSection}
         navigationRequest={navigationRequest}

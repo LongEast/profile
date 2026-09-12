@@ -16,6 +16,11 @@ const SECTION_BY_ID = Object.fromEntries(
   sections.map((section) => [section.id, section]),
 );
 
+const getSystemTheme = () => {
+  if (typeof window === "undefined") return "day";
+  return window.matchMedia?.("(prefers-color-scheme: dark)").matches ? "night" : "day";
+};
+
 const getSectionFromHash = () => {
   if (typeof window === "undefined") return "home";
 
@@ -251,7 +256,7 @@ function ControlsHint() {
   );
 }
 
-function CelestialSticker({ activeTheme, reducedMotion }) {
+function CelestialSticker({ activeTheme, onToggleTheme, reducedMotion }) {
   const previousThemeRef = useRef(activeTheme);
   const sequenceRef = useRef(0);
   const [transition, setTransition] = useState({
@@ -298,11 +303,14 @@ function CelestialSticker({ activeTheme, reducedMotion }) {
   };
 
   return (
-    <aside
-      aria-hidden="true"
+    <button
+      aria-label={`Switch to ${activeTheme === "day" ? "dark" : "light"} mode`}
       className="v3-celestial-pulley"
       data-active={activeTheme}
+      data-block-game-touch
       data-transition={transition.from ? `${transition.from}-to-${transition.to}` : "settled"}
+      onClick={onToggleTheme}
+      type="button"
     >
       <span className="v3-celestial-pulley__bar"><i /><b /></span>
 
@@ -335,12 +343,15 @@ function CelestialSticker({ activeTheme, reducedMotion }) {
           </g>
         </svg>
       </div>
-    </aside>
+
+      <span aria-hidden="true" className="v3-theme-tooltip">Click to change mode</span>
+    </button>
   );
 }
 
 function FallbackPortfolio({
   activeSection,
+  activeTheme,
   onNavigate,
   onOpenAward,
   onOpenExperience,
@@ -352,7 +363,7 @@ function FallbackPortfolio({
   }, [activeSection]);
 
   return (
-    <main className="v3-fallback" data-phase={SECTION_BY_ID[activeSection].theme}>
+    <main className="v3-fallback" data-phase={activeTheme}>
       <header id="home">
         <p>DAY &amp; NIGHT / V3</p>
         <h1>{profile.name}</h1>
@@ -395,6 +406,7 @@ function FallbackPortfolio({
 export default function DayNightPortfolio() {
   const [initialSection] = useState(getSectionFromHash);
   const [activeSection, setActiveSection] = useState(initialSection);
+  const [activeTheme, setActiveTheme] = useState(getSystemTheme);
   const [navigationRequest, setNavigationRequest] = useState(null);
   const [selectedAward, setSelectedAward] = useState(null);
   const [selectedProject, setSelectedProject] = useState(null);
@@ -409,7 +421,6 @@ export default function DayNightPortfolio() {
   const modalOpenerRef = useRef(null);
   const navigationNonceRef = useRef(0);
 
-  const activeTheme = SECTION_BY_ID[activeSection]?.theme ?? "day";
   const palette = palettes[activeTheme];
   const modal = useMemo(() => (
     selectedProject
@@ -463,6 +474,10 @@ export default function DayNightPortfolio() {
   }, [rememberOpener]);
 
   const fallback = !webglSupported;
+
+  const toggleTheme = useCallback(() => {
+    setActiveTheme((current) => current === "day" ? "night" : "day");
+  }, []);
 
   const commitSection = useCallback((sectionId, shouldUpdateHash = true) => {
     if (!SECTION_BY_ID[sectionId]) return;
@@ -587,11 +602,16 @@ export default function DayNightPortfolio() {
         className="v3-scene-layer"
         inert={Boolean(modal)}
       >
-        <CelestialSticker activeTheme={activeTheme} reducedMotion={reducedMotion} />
+        <CelestialSticker
+          activeTheme={activeTheme}
+          onToggleTheme={toggleTheme}
+          reducedMotion={reducedMotion}
+        />
 
         {fallback ? (
           <FallbackPortfolio
             activeSection={activeSection}
+            activeTheme={activeTheme}
             onNavigate={requestNavigation}
             onOpenAward={openAward}
             onOpenExperience={openExperience}
@@ -602,6 +622,7 @@ export default function DayNightPortfolio() {
           <WorldErrorBoundary onError={() => setWebglSupported(false)}>
             <WorldScene
               activeSection={activeSection}
+              activeTheme={activeTheme}
               blocked={Boolean(modal)}
               initialSection={initialSection}
               navigationRequest={navigationRequest}
