@@ -86,6 +86,7 @@ class WorldErrorBoundary extends Component {
 
 function Modal({ closeButtonRef, item, type, onClose, dialogRef }) {
   const isProject = type === "project";
+  const isNotice = type === "notice";
   const headingId = `${type}-${item.id}-title`;
 
   return (
@@ -93,7 +94,7 @@ function Modal({ closeButtonRef, item, type, onClose, dialogRef }) {
       <section
         aria-labelledby={headingId}
         aria-modal="true"
-        className="v3-modal"
+        className={`v3-modal${isNotice ? " v3-modal--notice" : ""}`}
         onMouseDown={(event) => event.stopPropagation()}
         ref={dialogRef}
         role="dialog"
@@ -109,42 +110,52 @@ function Modal({ closeButtonRef, item, type, onClose, dialogRef }) {
           ×
         </button>
 
-        {isProject ? <ProjectPreview kind={item.art} /> : <ExhibitMark kind={item.exhibit} />}
+        {isNotice ? (
+          <>
+            <p className="v3-modal__eyebrow">{item.label}</p>
+            <h2 id={headingId}>Coming soon</h2>
+            <p className="v3-modal__body">The blog is still being prepared. Please check back soon.</p>
+          </>
+        ) : (
+          <>
+            {isProject ? <ProjectPreview kind={item.art} /> : <ExhibitMark kind={item.exhibit} />}
 
-        <p className="v3-modal__eyebrow">
-          {isProject ? item.eyebrow : item.placement ?? item.date ?? "Experience"}
-        </p>
-        <h2 id={headingId}>{item.title}</h2>
-        <p className="v3-modal__meta">
-          {[item.organization, item.location, item.date].filter(Boolean).join(" · ")}
-        </p>
-        <p className="v3-modal__body">{item.detail ?? item.summary}</p>
+            <p className="v3-modal__eyebrow">
+              {isProject ? item.eyebrow : item.placement ?? item.date ?? "Experience"}
+            </p>
+            <h2 id={headingId}>{item.title}</h2>
+            <p className="v3-modal__meta">
+              {[item.organization, item.location, item.date].filter(Boolean).join(" · ")}
+            </p>
+            <p className="v3-modal__body">{item.detail ?? item.summary}</p>
 
-        {item.details?.length ? (
-          <ul className="v3-modal__list">
-            {item.details.map((detail) => (
-              <li key={detail}>{detail}</li>
-            ))}
-          </ul>
-        ) : null}
+            {item.details?.length ? (
+              <ul className="v3-modal__list">
+                {item.details.map((detail) => (
+                  <li key={detail}>{detail}</li>
+                ))}
+              </ul>
+            ) : null}
 
-        {item.tags?.length ? (
-          <div aria-label="Project technologies" className="v3-modal__tags">
-            {item.tags.map((tag) => (
-              <span key={tag}>{tag}</span>
-            ))}
-          </div>
-        ) : null}
+            {item.tags?.length ? (
+              <div aria-label="Project technologies" className="v3-modal__tags">
+                {item.tags.map((tag) => (
+                  <span key={tag}>{tag}</span>
+                ))}
+              </div>
+            ) : null}
 
-        {item.links?.length ? (
-          <div className="v3-modal__links">
-            {item.links.map((link) => (
-              <a href={link.href} key={link.href} rel="noreferrer" target="_blank">
-                {link.label} <span aria-hidden="true">↗</span>
-              </a>
-            ))}
-          </div>
-        ) : null}
+            {item.links?.length ? (
+              <div className="v3-modal__links">
+                {item.links.map((link) => (
+                  <a href={link.href} key={link.href} rel="noreferrer" target="_blank">
+                    {link.label} <span aria-hidden="true">↗</span>
+                  </a>
+                ))}
+              </div>
+            ) : null}
+          </>
+        )}
       </section>
     </div>
   );
@@ -328,7 +339,14 @@ function CelestialSticker({ activeTheme, reducedMotion }) {
   );
 }
 
-function FallbackPortfolio({ activeSection, onNavigate, onOpenAward, onOpenExperience, onOpenProject }) {
+function FallbackPortfolio({
+  activeSection,
+  onNavigate,
+  onOpenAward,
+  onOpenExperience,
+  onOpenProject,
+  onOpenUnavailableLink,
+}) {
   useEffect(() => {
     document.getElementById(activeSection)?.scrollIntoView({ block: "start" });
   }, [activeSection]);
@@ -349,22 +367,26 @@ function FallbackPortfolio({ activeSection, onNavigate, onOpenAward, onOpenExper
         <p>{profile.education.map((education) => `${education.institution} — ${education.program}`).join(" · ")}</p>
         <div className="v3-fallback__links">
           {profile.links.map((link) => (
-            <a href={link.href} key={link.id} rel={link.external ? "noreferrer" : undefined} target={link.external ? "_blank" : undefined}>{link.label}</a>
+            link.href ? (
+              <a href={link.href} key={link.id} rel={link.external ? "noreferrer" : undefined} target={link.external ? "_blank" : undefined}>{link.label}</a>
+            ) : (
+              <button aria-haspopup="dialog" key={link.id} onClick={() => onOpenUnavailableLink(link)} type="button">{link.label}</button>
+            )
           ))}
         </div>
       </section>
 
-      <section aria-labelledby="v3-fallback-awards-title" id="awards">
-        <h2 id="v3-fallback-awards-title">Awards</h2>
-        {awards.map((award) => <button key={award.id} onClick={() => onOpenAward(award)} type="button">{award.placement} · {award.title}</button>)}
+      <section aria-labelledby="v3-fallback-experience-title" id="experience">
+        <h2 id="v3-fallback-experience-title">Experience</h2>
+        {experiences.map((experience) => <button key={experience.id} onClick={() => onOpenExperience(experience)} type="button">{experience.title}</button>)}
       </section>
       <section aria-labelledby="v3-fallback-projects-title" id="projects">
         <h2 id="v3-fallback-projects-title">Projects</h2>
         {projects.map((project) => <button key={project.id} onClick={() => onOpenProject(project)} type="button">{project.title}</button>)}
       </section>
-      <section aria-labelledby="v3-fallback-experience-title" id="experience">
-        <h2 id="v3-fallback-experience-title">Experience</h2>
-        {experiences.map((experience) => <button key={experience.id} onClick={() => onOpenExperience(experience)} type="button">{experience.title}</button>)}
+      <section aria-labelledby="v3-fallback-awards-title" id="awards">
+        <h2 id="v3-fallback-awards-title">Awards</h2>
+        {awards.map((award) => <button key={award.id} onClick={() => onOpenAward(award)} type="button">{award.placement} · {award.title}</button>)}
       </section>
     </main>
   );
@@ -377,6 +399,7 @@ export default function DayNightPortfolio() {
   const [selectedAward, setSelectedAward] = useState(null);
   const [selectedProject, setSelectedProject] = useState(null);
   const [selectedExperience, setSelectedExperience] = useState(null);
+  const [selectedUnavailableLink, setSelectedUnavailableLink] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [webglSupported, setWebglSupported] = useState(canUseWebGL);
   const [reducedMotion, setReducedMotion] = useState(false);
@@ -395,14 +418,17 @@ export default function DayNightPortfolio() {
         ? { item: selectedAward, type: "award" }
         : selectedExperience
           ? { item: selectedExperience, type: "experience" }
-          : null
-  ), [selectedAward, selectedExperience, selectedProject]);
+          : selectedUnavailableLink
+            ? { item: selectedUnavailableLink, type: "notice" }
+            : null
+  ), [selectedAward, selectedExperience, selectedProject, selectedUnavailableLink]);
 
   const closeModal = useCallback(() => {
     const opener = modalOpenerRef.current;
     setSelectedAward(null);
     setSelectedProject(null);
     setSelectedExperience(null);
+    setSelectedUnavailableLink(null);
 
     window.setTimeout(() => {
       if (opener instanceof HTMLElement && document.contains(opener)) opener.focus();
@@ -429,6 +455,11 @@ export default function DayNightPortfolio() {
   const openExperience = useCallback((experience) => {
     rememberOpener();
     setSelectedExperience(experience);
+  }, [rememberOpener]);
+
+  const openUnavailableLink = useCallback((link) => {
+    rememberOpener();
+    setSelectedUnavailableLink(link);
   }, [rememberOpener]);
 
   const fallback = !webglSupported;
@@ -565,6 +596,7 @@ export default function DayNightPortfolio() {
             onOpenAward={openAward}
             onOpenExperience={openExperience}
             onOpenProject={openProject}
+            onOpenUnavailableLink={openUnavailableLink}
           />
         ) : (
           <WorldErrorBoundary onError={() => setWebglSupported(false)}>
@@ -576,6 +608,7 @@ export default function DayNightPortfolio() {
               onOpenAward={openAward}
               onOpenExperience={openExperience}
               onOpenProject={openProject}
+              onOpenUnavailableLink={openUnavailableLink}
               onSectionChange={commitSection}
               reducedMotion={reducedMotion}
             />

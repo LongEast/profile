@@ -6,7 +6,7 @@
  * of truth.
  */
 
-export const SECTION_ORDER = ["home", "awards", "projects", "experience"];
+export const SECTION_ORDER = ["home", "experience", "projects", "awards"];
 
 export const palettes = {
   day: {
@@ -46,13 +46,13 @@ export const sections = [
     description: "A small studio for introductions and links.",
   },
   {
-    id: "awards",
-    label: "Awards",
-    hash: "#awards",
+    id: "experience",
+    label: "Experience",
+    hash: "#experience",
     theme: "night",
     anchor: 42,
     eyebrow: "Night / 02",
-    description: "Five milestones, arranged as a midnight gallery.",
+    description: "Learning, teaching, and quantitative-program milestones.",
   },
   {
     id: "projects",
@@ -64,35 +64,35 @@ export const sections = [
     description: "Things made for people, plans, and data.",
   },
   {
-    id: "experience",
-    label: "Experience",
-    hash: "#experience",
+    id: "awards",
+    label: "Awards",
+    hash: "#awards",
     theme: "night",
     anchor: 144,
     eyebrow: "Night / 04",
-    description: "Learning, teaching, and quantitative-program milestones.",
+    description: "Five milestones, arranged as a midnight gallery.",
   },
 ];
 
 export const profile = {
   name: "Junyi(Je)",
   pronouns: "she/her",
-  headline: "喜欢探索的计算机学生^^",
+  headline: "a comp sci student likes to explore^^",
   introduction:
-    "除此之外，日常生活还喜欢电子游戏和桌游",
+    "beside, I like video games and board games!",
   location: "Sydney, Australia",
   education: [
     {
       institution: "University of New South Wales (UNSW)",
-      program: "Bachelor of Advanced Computer Science (Honours)",
-      period: "Sep 2024 – Aug 2028",
-      detail: "WAM 96.3/100 (HD, top 1%)",
+      program: "Bachelor of Computer Science",
+      period: "May 2024 – Oct 2027(3 years degree)",
+      detail: "software engineering, Algorithm, etc.",
     },
     {
-      institution: "ETH Zürich",
-      program: "Exchange Semester · Department of Computer Science (D-INFK)",
-      period: "2026",
-      detail: "GPA 5.9/6 · Highest-tier Alumni Exchange Scholarship",
+      institution: "Georgia Institute of Technology",
+      program: "Exchange Semester",
+      period: "Jan 2026 - May 2026",
+      detail: "Machine Learning, NLP, Intro to robotics",
     },
   ],
   skills: {
@@ -116,10 +116,10 @@ export const profile = {
       external: true,
     },
     {
-      id: "Xiaohongshu",
-      label: "LinkedIn",
+      id: "blog",
+      label: "Blog",
       value: "junyi",
-      href: "https://www.linkedin.com/in/zhuolin-li-9b3bb7392/",
+      href: "",
       external: true,
     },
   ],

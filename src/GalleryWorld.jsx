@@ -306,7 +306,7 @@ function HeroExhibit({ activeNight, playerRef }) {
         distanceFactor={11}
         position={[isNarrow ? 0 : -5.1, isNarrow ? 5.9 : 6.25, -6.72]}
       >
-        <p className="v3-world-hero-kicker">Hi, 我是</p>
+        <p className="v3-world-hero-kicker">Hi, I'm</p>
         <h1>{profile.name}</h1>
         <p className="v3-world-hero-headline">{profile.headline}</p>
         <p className="v3-world-hero-intro">{profile.introduction}</p>
@@ -344,7 +344,7 @@ function EducationExhibit({ activeNight, playerRef }) {
   );
 }
 
-function ContactExhibit({ activeNight, playerRef }) {
+function ContactExhibit({ activeNight, onOpenUnavailableLink, playerRef }) {
   return (
     <CircularSlot baseX={EXHIBIT_LAYOUT.home.contact} playerRef={playerRef}>
       <OutlinedBox
@@ -374,16 +374,33 @@ function ContactExhibit({ activeNight, playerRef }) {
         <p className="v3-world-eyebrow">Find me online</p>
         <h2>Let&apos;s make something thoughtful.</h2>
         <nav aria-label="Zhuolin Li contact links">
-          {profile.links.map((link) => (
-            <a
-              href={link.href}
-              key={link.id}
-              rel={link.external ? "noreferrer" : undefined}
-              target={link.external ? "_blank" : undefined}
-            >
-              <span className="v3-world-control-label">{link.label} <span aria-hidden="true">↗</span></span>
-            </a>
-          ))}
+          {profile.links.map((link) => {
+            const label = (
+              <span className="v3-world-control-label">
+                {link.label} <span aria-hidden="true">↗</span>
+              </span>
+            );
+
+            return link.href ? (
+              <a
+                href={link.href}
+                key={link.id}
+                rel={link.external ? "noreferrer" : undefined}
+                target={link.external ? "_blank" : undefined}
+              >
+                {label}
+              </a>
+            ) : (
+              <button
+                aria-haspopup="dialog"
+                key={link.id}
+                onClick={() => onOpenUnavailableLink(link)}
+                type="button"
+              >
+                {label}
+              </button>
+            );
+          })}
         </nav>
       </WorldHtml>
     </CircularSlot>
@@ -776,6 +793,7 @@ export function GalleryWorld({
   onOpenAward,
   onOpenExperience,
   onOpenProject,
+  onOpenUnavailableLink,
   playerRef,
   reducedMotion,
 }) {
@@ -793,7 +811,11 @@ export function GalleryWorld({
 
       <HeroExhibit activeNight={activeNight} playerRef={playerRef} />
       <EducationExhibit activeNight={activeNight} playerRef={playerRef} />
-      <ContactExhibit activeNight={activeNight} playerRef={playerRef} />
+      <ContactExhibit
+        activeNight={activeNight}
+        onOpenUnavailableLink={onOpenUnavailableLink}
+        playerRef={playerRef}
+      />
 
       <DirectionSign
         activeNight={activeNight}

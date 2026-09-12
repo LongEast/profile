@@ -20,9 +20,9 @@ export const ARRIVAL_THRESHOLD = 0.3;
 
 // Sorted by rangeStart. The final Home range wraps across the end of the track.
 export const WORLD_SECTIONS = [
-  { id: "awards", anchor: 42, rangeStart: 34, phase: "night" },
+  { id: "experience", anchor: 42, rangeStart: 34, phase: "night" },
   { id: "projects", anchor: 72, rangeStart: 58, phase: "day" },
-  { id: "experience", anchor: 144, rangeStart: 132, phase: "night" },
+  { id: "awards", anchor: 144, rangeStart: 132, phase: "night" },
   { id: "home", anchor: 0, rangeStart: 258, phase: "day" },
 ];
 
@@ -33,7 +33,7 @@ export const EXHIBIT_LAYOUT = {
     contact: 9,
     education: 21,
   },
-  awards: {
+  experience: {
     sign: 32,
     items: [34, 38, 42, 46, 50],
   },
@@ -41,7 +41,7 @@ export const EXHIBIT_LAYOUT = {
     sign: 59,
     items: [72, 96, 120],
   },
-  experience: {
+  awards: {
     sign: 134,
     items: [144, 168, 192, 216, 240],
   },

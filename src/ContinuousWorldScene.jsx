@@ -579,6 +579,7 @@ function SceneContents({
   onOpenAward,
   onOpenExperience,
   onOpenProject,
+  onOpenUnavailableLink,
   onSectionChange,
   reducedMotion,
 }) {
@@ -610,6 +611,7 @@ function SceneContents({
         onOpenAward={onOpenAward}
         onOpenExperience={onOpenExperience}
         onOpenProject={onOpenProject}
+        onOpenUnavailableLink={onOpenUnavailableLink}
         playerRef={playerRef}
         reducedMotion={reducedMotion}
       />
@@ -642,6 +644,7 @@ export default function ContinuousWorldScene({
   onOpenAward,
   onOpenExperience,
   onOpenProject,
+  onOpenUnavailableLink,
   onSectionChange,
   reducedMotion = false,
 }) {
@@ -662,6 +665,7 @@ export default function ContinuousWorldScene({
         onOpenAward={onOpenAward}
         onOpenExperience={onOpenExperience}
         onOpenProject={onOpenProject}
+        onOpenUnavailableLink={onOpenUnavailableLink}
         onSectionChange={onSectionChange}
         reducedMotion={reducedMotion}
       />
