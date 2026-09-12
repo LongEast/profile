@@ -39,7 +39,7 @@ export const EXHIBIT_LAYOUT = {
   },
   projects: {
     sign: 59,
-    items: [72, 90, 108, 126],
+    items: [72, 88, 104, 120],
   },
   awards: {
     sign: 134,
