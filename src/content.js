@@ -61,7 +61,7 @@ export const sections = [
     theme: "day",
     anchor: 72,
     eyebrow: "Day / 03",
-    description: "Things made for people, plans, and data.",
+    description: "AI agents, product prototypes, and enterprise tools.",
   },
   {
     id: "awards",
@@ -177,14 +177,60 @@ export const awards = [
 
 export const projects = [
   {
-    id: "uslike",
-    eyebrow: "Relationship product",
-    title: "Uslike",
+    id: "urbantrip",
+    eyebrow: "Agent systems",
+    title: "UrbanTrip · TPC@IJCAI 1st Place",
     summary:
-      "A relationship-matching website designed to turn a match into a better conversation.",
+      "An end-to-end AI planning agent for feasible travel itineraries under complex real-world constraints.",
+    detail:
+      "UrbanTrip converts natural-language travel requirements into executable, validated plans while accounting for budgets, hotel requirements, attraction opening hours, transport modes, and visit order.",
+    details: [
+      "Developed an end-to-end AI planning agent that parses natural-language requirements into a structured Task State, then executes a complete Retrieval → Planning → Tool/API Execution → Validation → Fallback workflow.",
+      "Established agent quality controls with JSON Schema, Structured Output, validators, and timeout handling. Distinguished formatting, constraint, and execution failures, then fed the error causes back into subsequent planning to improve stability on complex tasks.",
+      "Built automated evaluation and regression tests covering 1,000 queries. Categorised formatting errors, constraint violations, time conflicts, budget overruns, and execution timeouts to continuously analyse agent strategy performance.",
+    ],
+    tags: ["Python", "LLM agents", "Structured output", "Evaluation"],
+    art: "urbantrip",
+    links: [
+      {
+        label: "View source",
+        href: "https://github.com/suzuran555/travel",
+        external: true,
+      },
+    ],
+  },
+  {
+    id: "atlassian-home-dashboard",
+    eyebrow: "Enterprise collaboration",
+    title: "Atlassian Home Dashboard Gadget",
+    organization: "Atlassian Industry Collaboration Project",
+    date: "Jun 2026 – Aug 2026",
+    summary:
+      "Migrated a Jira Space Gadget to Atlassian Home Dashboard and delivered the remaining full-stack integration with Forge.",
+    detail:
+      "A full-stack enterprise dashboard gadget delivered with Atlassian Forge, Figma, and an AI-assisted design-to-development workflow.",
+    details: [
+      "Worked with Atlassian’s enterprise team to migrate and adapt an existing Jira Space Gadget for Atlassian Home Dashboard. Reused official Atlassian components and independently implemented the remaining frontend, backend, and page-integration logic with Atlassian Forge.",
+      "Designed the product storyboard and interaction flow in Figma, then connected design context to development through Codex + Figma MCP. Completed the end-to-end process from requirement analysis and product design to AI-assisted full-stack implementation and final delivery, collaborating directly with Atlassian product owners throughout rollout.",
+    ],
+    tags: ["Atlassian Forge", "Figma", "Codex", "Full-stack"],
+    art: "dashboard",
+    links: [],
+  },
+  {
+    id: "uslike",
+    eyebrow: "AI matching product · Top 300 / 4,000 teams",
+    title: "Uslike",
+    organization: "Feishu Competition · Milian Industry Challenge",
+    date: "Jul 2026 – Present",
+    summary:
+      "An AI matching and relationship-building platform shaped through product discovery, prototyping, and competition feedback.",
     detail:
       "Uslike pairs people through shared interests and brainwave-style questions, then uses mutual reveals and rooms as gentle icebreakers for deeper conversation and connection.",
-    tags: ["React", "FastAPI", "Tailwind CSS", "Matching flows"],
+    details: [
+      "Led the project and decomposed the complete AI product workflow from scratch, owning AI capability design, application-flow design, frontend prototype implementation, and solution iteration. Worked directly with corporate product managers to refine the product around user value, technical feasibility, and competition feedback; the project advanced to the top 300 out of 4,000 teams.",
+    ],
+    tags: ["React", "FastAPI", "AI product design", "Frontend prototype"],
     art: "uslike",
     links: [
       {
@@ -206,37 +252,27 @@ export const projects = [
     ],
   },
   {
-    id: "urbantrip",
-    eyebrow: "Agent systems",
-    title: "UrbanTrip",
+    id: "mobile-ad-agent",
+    eyebrow: "Mobile AI automation · Independent project",
+    title: "Cross-App Mobile Ad Recognition Agent",
+    organization: "Independent Project",
+    date: "Jul 2026 – Aug 2026",
     summary:
-      "A constraint-aware agent for building feasible multi-city itineraries across China.",
+      "A modular mobile AI automation system for detecting ads across social and short-video feeds.",
     detail:
-      "UrbanTrip turns natural-language travel constraints into coherent plans that account for intercity travel, local routing, timing, budgets, and recommendations.",
-    tags: ["Python", "LLM agents", "Constraint planning"],
-    art: "urbantrip",
+      "The agent automates scrolling, screenshots, UI Tree/OCR parsing, and ad classification across Weibo, Xiaohongshu, and short-video feeds.",
+    details: [
+      "Abstracted heterogeneous app page structures behind unified Observation, Action, and Extraction interfaces.",
+      "Designed UI Tree, OCR, visual embeddings, and AI models as independently replaceable perception and reasoning modules. Combined page text with visual signals, then compared rule-based, retrieval/ML, and AI-model approaches across platforms for recognition quality and runtime cost.",
+      "Built a session-based data pipeline for screenshots, UI text, OCR output, content regions, and metadata. Reduced duplicates through cross-frame deduplication and collected and manually reviewed about 400 posts and videos for model development and testing.",
+      "Established Precision, Recall, F1, False Positive Rate, and Invalid Output Rate metrics, and performed structured root-cause analysis on bad cases.",
+    ],
+    tags: ["Mobile automation", "OCR", "Visual embeddings", "Evaluation"],
+    art: "mobile-agent",
     links: [
       {
         label: "View source",
-        href: "https://github.com/suzuran555/travel",
-        external: true,
-      },
-    ],
-  },
-  {
-    id: "cohort-builder",
-    eyebrow: "Clinical data tooling",
-    title: "Hip Fracture Cohort Builder",
-    summary:
-      "A clinical data exploration tool with Boolean cohort search and visual analysis.",
-    detail:
-      "A focused interface for defining hip-fracture cohorts with Boolean logic, then examining the resulting population through visual analysis.",
-    tags: ["Boolean search", "Clinical data", "Visual analysis"],
-    art: "cohort",
-    links: [
-      {
-        label: "Open project",
-        href: "https://hip-fracture-cohort-builder.vercel.app/",
+        href: "https://github.com/LongEast/mobile-ad-agent",
         external: true,
       },
     ],

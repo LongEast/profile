@@ -38,7 +38,8 @@ const messages = {
     preview: {
       uslike: ["MATCH", "MUTUAL REVEAL", "ROOM"],
       urbantrip: ["CONSTRAINT", "ROUTE", "VALID"],
-      cohort: ["COHORT", "BOOLEAN", "ANALYSE"],
+      dashboard: ["HOME", "GADGET", "DELIVER"],
+      "mobile-agent": ["CAPTURE", "OCR", "CLASSIFY"],
     },
   },
   zh: {
@@ -73,7 +74,8 @@ const messages = {
     preview: {
       uslike: ["匹配", "双向揭晓", "房间"],
       urbantrip: ["约束", "路线", "可行"],
-      cohort: ["队列", "布尔检索", "分析"],
+      dashboard: ["首页", "组件", "交付"],
+      "mobile-agent": ["截图", "识别", "分类"],
     },
   },
 };
@@ -93,7 +95,7 @@ const zhTranslations = {
     projects: {
       label: "项目",
       eyebrow: "白昼 / 03",
-      description: "为人、计划与数据打造的作品。",
+      description: "AI Agent、产品原型与企业工具项目。",
     },
     awards: {
       label: "获奖",
@@ -161,31 +163,64 @@ const zhTranslations = {
     },
   },
   projects: {
+    urbantrip: {
+      eyebrow: "智能体系统",
+      title: "UrbanTrip · TPC@IJCAI 第一名",
+      summary: "面向复杂现实约束生成可执行旅行方案的端到端 AI 规划 Agent。",
+      detail: "UrbanTrip 将自然语言旅行需求转化为可执行、可验证的规划，同时处理预算、酒店条件、景点开放时间、交通方式与访问顺序等约束。",
+      details: [
+        "面向预算、酒店条件、景点开放时间、交通方式及访问顺序等复杂约束，开发端到端 AI 规划 Agent；将自然语言需求解析为结构化 Task State，并构建 Retrieval → Planning → Tool / API Execution → Validation → Fallback 的完整执行链路。",
+        "使用 JSON Schema、Structured Output、Validator 与 Timeout Handling 建立 Agent 执行质量控制机制；区分格式失败、约束失败及执行失败，并将错误原因反馈至后续规划流程，提升复杂任务执行稳定性。",
+        "构建覆盖 1000 条 Query 的自动化 Evaluation / Regression Test，对格式错误、Constraint Violation、时间冲突、预算超限及执行超时进行分类统计，通过实验结果持续分析 Agent 策略效果。",
+      ],
+      tags: ["Python", "LLM 智能体", "结构化输出", "自动化评估"],
+      links: [{ label: "查看源码" }],
+    },
+    "atlassian-home-dashboard": {
+      eyebrow: "企业合作项目",
+      title: "Atlassian Home Dashboard Gadget",
+      organization: "Atlassian 企业合作项目",
+      date: "2026年6月 – 2026年8月",
+      summary: "将 Jira Space Gadget 迁移至 Atlassian Home Dashboard，并基于 Forge 完成全栈集成。",
+      detail: "使用 Atlassian Forge、Figma 与 AI 辅助设计开发流程交付的企业级 Dashboard Gadget。",
+      details: [
+        "与 Atlassian 企业团队合作，将已有 Jira Space Gadget 迁移并适配至 Atlassian Home Dashboard；复用 Atlassian 官方组件，并基于 Atlassian Forge 独立实现其余前后端业务逻辑与页面集成。",
+        "使用 Figma 设计产品 Storyboard 与交互流程，并通过 Codex + Figma MCP 将设计上下文接入开发流程；完成从需求梳理、产品设计、AI 全栈实现到最终交付的端到端流程，并与 Atlassian 产品负责人协同推进项目落地。",
+      ],
+      tags: ["Atlassian Forge", "Figma", "Codex", "全栈开发"],
+    },
     uslike: {
-      eyebrow: "关系匹配产品",
-      summary: "一个帮助用户把匹配转化为更好交流的关系匹配网站。",
+      eyebrow: "AI 匹配产品 · 4000 队中入围 300 强",
+      title: "互像 Uslike",
+      organization: "飞书比赛 · 米连企业命题",
+      date: "2026年7月 – 至今",
+      summary: "通过产品探索、前端原型和比赛反馈持续迭代的 AI 匹配与关系生成平台。",
       detail: "Uslike 通过共同兴趣和脑电波式问题匹配用户，再以双向揭晓和房间作为自然的破冰方式，帮助双方展开更深入的交流与连接。",
-      tags: ["React", "FastAPI", "Tailwind CSS", "匹配流程"],
+      details: [
+        "担任项目队长，从零拆解完整 AI 产品链路，负责 AI 能力设计、应用流程设计、前端原型实现及方案迭代；与企业产品经理直接沟通，根据用户价值、技术可实现性及比赛反馈持续调整方案，项目最终入围 300 强 / 4000 队。",
+      ],
+      tags: ["React", "FastAPI", "AI 产品设计", "前端原型"],
       links: [
         { label: "查看产品文档" },
         { label: "打开前端原型", note: "托管额度暂停时，部署可能暂时无法访问。" },
         { label: "查看源码" },
       ],
     },
-    urbantrip: {
-      eyebrow: "智能体系统",
-      summary: "一个面向中国多城市旅行、能够理解约束条件的行程规划智能体。",
-      detail: "UrbanTrip 将自然语言旅行需求转化为连贯方案，并综合考虑城际交通、市内路线、时间、预算和推荐内容。",
-      tags: ["Python", "LLM 智能体", "约束规划"],
+    "mobile-ad-agent": {
+      eyebrow: "移动端 AI 自动化 · 个人项目",
+      title: "跨 App 移动端广告识别 Agent",
+      organization: "个人项目",
+      date: "2026年7月 – 2026年8月",
+      summary: "面向社交与短视频信息流的模块化移动端广告识别系统。",
+      detail: "面向微博、小红书及短视频信息流，自动完成滑动、截图、UI Tree / OCR 解析与广告分类。",
+      details: [
+        "将不同 App 页面结构抽象为统一的 Observation / Action / Extraction Interface。",
+        "将 UI Tree、OCR、视觉 Embedding 与 AI Model 设计为可独立替换的感知和推理模块，组合页面文本与视觉信息进行判断，并比较 Rule-based、Retrieval / ML 与 AI Model 在不同平台上的识别效果与运行成本。",
+        "构建 session-based 数据处理 Pipeline，管理截图、UI 文本、OCR 输出、内容区域及 Metadata，通过跨帧去重减少重复数据；累计采集并人工复核约 400 条帖子及视频，用于模型开发与测试。",
+        "建立 Precision、Recall、F1、False Positive Rate 和 Invalid Output Rate 等评测指标，并对 Badcase 进行结构化归因。",
+      ],
+      tags: ["移动端自动化", "OCR", "视觉 Embedding", "评估体系"],
       links: [{ label: "查看源码" }],
-    },
-    "cohort-builder": {
-      eyebrow: "临床数据工具",
-      title: "髋部骨折队列构建器",
-      summary: "一个支持布尔队列检索与可视化分析的临床数据探索工具。",
-      detail: "通过布尔逻辑定义髋部骨折患者队列，并利用可视化分析检查所得人群。",
-      tags: ["布尔检索", "临床数据", "可视化分析"],
-      links: [{ label: "打开项目" }],
     },
   },
   experiences: {
