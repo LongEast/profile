@@ -169,7 +169,7 @@ const zhTranslations = {
         "使用 Figma 设计产品 Storyboard 与交互流程，并通过 Codex + Figma MCP 将设计上下文接入开发流程；完成从需求梳理、产品设计、AI 全栈实现到最终交付的端到端流程，并与 Atlassian 产品负责人协同推进项目落地。",
       ],
       tags: ["Figma", "Codex", "全栈开发"],
-      links: [{ label: "小组 Demo 视频" }],
+      links: [{ label: "最终报告" }],
     },
     uslike: {
       eyebrow: "AI 匹配产品 · 4000 队中入围 300 强",
