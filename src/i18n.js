@@ -130,7 +130,7 @@ const zhTranslations = {
   awards: {
     "agentic-travel": {
       placement: "第一名",
-      title: "智能体 AI 旅行规划挑战赛",
+      title: "智能体 AI 旅行规划挑战赛(IJCAI 2026)",
       organization: "南京大学",
       date: "2026年7月",
       detail: "使用 Python 构建约束驱动的任务规划流程，通过候选搜索、确定性验证、有限重试与回退机制，在预算和行程约束下生成可行计划。",

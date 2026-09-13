@@ -129,7 +129,7 @@ export const awards = [
   {
     id: "agentic-travel",
     placement: "1st Place",
-    title: "Agentic AI Travel Planning Challenge",
+    title: "Agentic AI Travel Planning Challenge(IJCAI TPC 2026)",
     organization: "Nanjing University",
     date: "Jul 2026",
     detail:
