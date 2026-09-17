@@ -129,7 +129,7 @@ export const awards = [
   {
     id: "agentic-travel",
     placement: "1st Place",
-    title: "Agentic AI Travel Planning Challenge",
+    title: "Agentic AI Travel Planning Challenge(IJCAI TPC 2026)",
     organization: "Nanjing University",
     date: "Jul 2026",
     detail:
@@ -190,8 +190,8 @@ export const projects = [
     art: "dashboard",
     links: [
       {
-        label: "Watch group demo",
-        href: "https://drive.google.com/file/d/1bm0b-WfXO7EZiwS5iTcek602-Nzea1_Z/view?usp=drive_link",
+        label: "Final report",
+        href: "https://drive.google.com/drive/folders/1AI4g8v4oM6dFRRXldQw1Kqdt4ISl3KqG?dmr=1&ec=wgc-drive-%5Bmodule%5D-goto",
         external: true,
       },
     ],
